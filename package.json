@@ -42,6 +42,7 @@
     "@briebug/jest-schematic": "^4.0.0",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
+    "@faker-js/faker": "^6.0.0-alpha.7",
     "@types/jest": "~27.4.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.11.0",
