@@ -10,7 +10,7 @@ function generateCourses(count: number): CourseEntity[] {
       id: faker.datatype.uuid(),
       title: faker.lorem.sentence(),
       creationDate: faker.date.recent(100),
-      description: faker.lorem.paragraph(),
+      description: faker.lorem.paragraphs(3),
       duration: faker.datatype.number(360)
     };
     result.push(course);
@@ -24,9 +24,9 @@ function generateCourses(count: number): CourseEntity[] {
   styleUrls: ['./courses-viewer.component.scss']
 })
 export class CoursesViewerComponent implements OnInit {
-  courses: CourseEntity[] = [...generateCourses(2)];
+  courses: CourseEntity[] = [];
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.courses = [...generateCourses(3)];
+  }
 }

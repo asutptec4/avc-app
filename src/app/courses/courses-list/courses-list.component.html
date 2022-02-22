@@ -1,0 +1,11 @@
+<app-course-item
+  *ngFor="let course of courses; trackBy: courseTrackByFn"
+  [course]="course"
+  (deleteAction)="onDeleteAction(course)"
+  (editAction)="onEditAction(course)"
+></app-course-item>
+<mat-card>
+  <mat-card-content align="center">
+    <button mat-button color="primary" (click)="onLoadMoreClick()">Load more</button>
+  </mat-card-content>
+</mat-card>

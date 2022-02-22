@@ -1,2 +1,8 @@
-<p>header works!</p>
-<app-logo></app-logo>
+<mat-toolbar color="primary">
+  <a>
+    <app-logo></app-logo>
+  </a>
+  <span class="header-spacer"></span>
+  <button mat-button aria-label="Login" (click)="onLoginClick()"><mat-icon>person</mat-icon>UserLogin</button>
+  <button mat-button aria-label="Logout" (click)="onLogoutClick()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+</mat-toolbar>

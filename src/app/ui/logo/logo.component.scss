@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+  cursor: pointer;
+
+  padding: 1rem;
+  text-align: center;
+  align-items: center;
+
+  .oval {
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    height: 30px;
+    width: 30px;
+  }
+
+  .triangle {
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-left: 16px solid white;
+    border-bottom: 8px solid transparent;
+    top: 5px;
+    position: relative;
+    left: 7px;
+  }
+
+  .logo-text {
+    text-decoration: none;
+  }
+}

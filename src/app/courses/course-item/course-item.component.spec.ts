@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CourseEntity } from '../common';
 import { CourseItemComponent } from './course-item.component';
 
 describe('CourseItemComponent', () => {
@@ -15,6 +16,7 @@ describe('CourseItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseItemComponent);
     component = fixture.componentInstance;
+    component.course = {} as CourseEntity;
     fixture.detectChanges();
   });
 

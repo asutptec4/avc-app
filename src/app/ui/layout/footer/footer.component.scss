@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+
+:host {
+  position: sticky;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 1rem;
+  background-color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+  text-align: center;
+  align-items: center;
+
+  .text {
+    color: white;
+  }
+}

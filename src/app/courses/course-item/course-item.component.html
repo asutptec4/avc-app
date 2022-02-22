@@ -1,2 +1,20 @@
-<p>course-item works!</p>
-{{ course | json }}
+<mat-card>
+  <mat-card-title>{{ course.title }}</mat-card-title>
+  <mat-card-subtitle class="course-item-subtitle">
+    <mat-icon aria-hidden="false" class="course-item-icon">watch_later</mat-icon>{{ course.duration }} min
+    <span class="course-item-subtitle-spacer"></span>
+    <mat-icon aria-hidden="false" class="course-item-icon">calendar_today </mat-icon>
+    {{ course.creationDate | date: 'mediumDate' }}
+  </mat-card-subtitle>
+  <mat-card-content>
+    <p>{{ course.description }}</p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="onEditClick()">
+      <mat-icon class="course-item-icon">edit</mat-icon>Edit
+    </button>
+    <button mat-raised-button color="primary" (click)="onDeleteClick()">
+      <mat-icon class="course-item-icon">delete</mat-icon>Delete
+    </button>
+  </mat-card-actions>
+</mat-card>

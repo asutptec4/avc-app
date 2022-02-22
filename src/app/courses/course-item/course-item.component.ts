@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { CourseEntity } from '../common';
 
@@ -7,10 +7,16 @@ import { CourseEntity } from '../common';
   templateUrl: './course-item.component.html',
   styleUrls: ['./course-item.component.scss']
 })
-export class CourseItemComponent implements OnInit {
+export class CourseItemComponent {
   @Input() course!: CourseEntity;
+  @Output() editAction: EventEmitter<void> = new EventEmitter();
+  @Output() deleteAction: EventEmitter<void> = new EventEmitter();
 
-  constructor() {}
+  onDeleteClick(): void {
+    this.deleteAction.emit();
+  }
 
-  ngOnInit(): void {}
+  onEditClick(): void {
+    this.editAction.emit();
+  }
 }

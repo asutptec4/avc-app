@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.courses-toolbar-search {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 2rem;
+
+  .courses-toolbar-search-input {
+    width: 300px;
+  }
+
+  .courses-toolbar-search-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.courses-toolbar-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  .courses-toolbar-controls-add-icon {
+    margin-right: 0.5rem;
+  }
+}
