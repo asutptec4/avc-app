@@ -1,4 +1,6 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { CoursesToolbarComponent } from './courses-toolbar.component';
 
@@ -8,7 +10,8 @@ describe('CoursesToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CoursesToolbarComponent]
+      declarations: [CoursesToolbarComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
@@ -19,6 +22,18 @@ describe('CoursesToolbarComponent', () => {
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should call onSearchClick', () => {
+    const button = fixture.debugElement.query(By.css(`[automation-id="courses-toolbar-search-button"]`));
+    button.triggerEventHandler('click', null);
+    expect(component).toBeTruthy();
+  });
+
+  it('should call onAddClick', () => {
+    const button = fixture.debugElement.query(By.css(`[automation-id="courses-toolbar-controls-add-button"]`));
+    button.triggerEventHandler('click', null);
     expect(component).toBeTruthy();
   });
 });

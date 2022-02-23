@@ -15,11 +15,11 @@ export class CoursesListComponent {
   }
 
   onDeleteAction(course: CourseEntity): void {
-    console.log(course?.id);
+    console.log(course.id);
   }
 
   onEditAction(course: CourseEntity): void {
-    console.log(course?.id);
+    console.log(course.id);
   }
 
   courseTrackByFn(index: number, course: CourseEntity): string {

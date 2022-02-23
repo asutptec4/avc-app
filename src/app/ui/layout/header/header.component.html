@@ -3,6 +3,10 @@
     <app-logo></app-logo>
   </a>
   <span class="header-spacer"></span>
-  <button mat-button aria-label="Login" (click)="onLoginClick()"><mat-icon>person</mat-icon>UserLogin</button>
-  <button mat-button aria-label="Logout" (click)="onLogoutClick()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+  <button mat-button aria-label="Login" automation-id="header-login-button" (click)="onLoginClick()">
+    <mat-icon>person</mat-icon>UserLogin
+  </button>
+  <button mat-button aria-label="Logout" automation-id="header-logout-button" (click)="onLogoutClick()">
+    <mat-icon>exit_to_app</mat-icon>Logout
+  </button>
 </mat-toolbar>

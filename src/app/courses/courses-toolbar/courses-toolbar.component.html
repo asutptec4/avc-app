@@ -5,10 +5,12 @@
     </mat-label>
     <input matInput [(ngModel)]="searchStr" />
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="onSearchClick()">Search</button>
+  <button mat-raised-button automation-id="courses-toolbar-search-button" color="primary" (click)="onSearchClick()">
+    Search
+  </button>
 </div>
 <div class="courses-toolbar-controls">
-  <button mat-raised-button color="primary" (click)="onAddClick()">
+  <button mat-raised-button automation-id="courses-toolbar-controls-add-button" color="primary" (click)="onAddClick()">
     <mat-icon aria-hidden="false" class="courses-toolbar-controls-add-icon">add_circle_outline</mat-icon>Add course
   </button>
 </div>
