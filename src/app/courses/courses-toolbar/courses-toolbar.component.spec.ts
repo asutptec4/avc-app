@@ -30,10 +30,4 @@ describe('CoursesToolbarComponent', () => {
     button.triggerEventHandler('click', null);
     expect(component).toBeTruthy();
   });
-
-  it('should call onAddClick', () => {
-    const button = fixture.debugElement.query(By.css(`[automation-id="courses-toolbar-controls-add-button"]`));
-    button.triggerEventHandler('click', null);
-    expect(component).toBeTruthy();
-  });
 });

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CourseEntity } from '../common';
 
@@ -10,6 +11,8 @@ import { CourseEntity } from '../common';
 export class CoursesListComponent {
   @Input() courses!: CourseEntity[];
 
+  constructor(private router: Router) {}
+
   onLoadMoreClick(): void {
     console.log('onLoadMoreClick');
   }
@@ -19,7 +22,7 @@ export class CoursesListComponent {
   }
 
   onEditAction(course: CourseEntity): void {
-    console.log(course.id);
+    this.router.navigate([course.id]);
   }
 
   courseTrackByFn(index: number, course: CourseEntity): string {

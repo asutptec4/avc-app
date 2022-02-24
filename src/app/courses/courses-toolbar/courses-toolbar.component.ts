@@ -8,10 +8,6 @@ import { Component } from '@angular/core';
 export class CoursesToolbarComponent {
   searchStr: string = '';
 
-  onAddClick(): void {
-    console.log('onAddClick');
-  }
-
   onSearchClick(): void {
     console.log(this.searchStr);
   }

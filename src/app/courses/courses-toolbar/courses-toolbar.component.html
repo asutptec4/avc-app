@@ -10,7 +10,7 @@
   </button>
 </div>
 <div class="courses-toolbar-controls">
-  <button mat-raised-button automation-id="courses-toolbar-controls-add-button" color="primary" (click)="onAddClick()">
+  <button mat-raised-button automation-id="courses-toolbar-controls-add-button" color="primary" [routerLink]="['new']">
     <mat-icon aria-hidden="false" class="courses-toolbar-controls-add-icon">add_circle_outline</mat-icon>Add course
   </button>
 </div>

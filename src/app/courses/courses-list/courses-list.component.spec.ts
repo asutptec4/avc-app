@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import faker from '@faker-js/faker';
 import { CourseEntity } from '../common';
 import { CourseItemComponent } from '../course-item/course-item.component';
@@ -18,11 +19,13 @@ const course: CourseEntity = {
 describe('CoursesListComponent', () => {
   let component: CoursesListComponent;
   let fixture: ComponentFixture<CoursesListComponent>;
+  const router = jest.fn();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CoursesListComponent, CourseItemComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [{ provide: Router, useValue: router }]
     }).compileComponents();
   });
 
