@@ -1,32 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import faker from '@faker-js/faker';
-
-import { CourseEntity } from '../common';
-
-function generateCourses(count: number): CourseEntity[] {
-  const result = [];
-  for (let i = 0; i < count; i++) {
-    const course: CourseEntity = {
-      id: faker.datatype.uuid(),
-      title: faker.lorem.sentence(),
-      creationDate: faker.date.recent(100),
-      description: faker.lorem.paragraphs(3),
-      duration: faker.datatype.number(360)
-    };
-    result.push(course);
-  }
-  return result;
-}
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-courses-viewer',
   templateUrl: './courses-viewer.component.html',
-  styleUrls: ['./courses-viewer.component.scss']
+  styleUrls: ['./courses-viewer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CoursesViewerComponent implements OnInit {
-  courses: CourseEntity[] = [];
+export class CoursesViewerComponent {
+  searchKey: string = '';
 
-  ngOnInit(): void {
-    this.courses = [...generateCourses(3)];
+  onSearchKeyChange(key: string): void {
+    this.searchKey = key;
   }
 }

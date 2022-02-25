@@ -1,2 +1,5 @@
-<app-courses-toolbar class="courses-viewer-courses-toolbar"></app-courses-toolbar>
-<app-courses-list [courses]="courses"></app-courses-list>
+<app-courses-toolbar
+  class="courses-viewer-courses-toolbar"
+  (searchKey)="onSearchKeyChange($event)"
+></app-courses-toolbar>
+<app-courses-list [searchKey]="searchKey"></app-courses-list>

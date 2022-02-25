@@ -13,6 +13,7 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesToolbarComponent } from './courses-toolbar/courses-toolbar.component';
 import { CoursesViewerComponent } from './courses-viewer/courses-viewer.component';
 import { CoursesComponent } from './courses.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CoursesComponent } from './courses.component';
     FormsModule,
     CommonModule,
     CoursesRoutingModule,
+    SharedModule,
     BreadcrumbsModule,
     MatCardModule,
     MatInputModule,

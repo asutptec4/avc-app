@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import faker from '@faker-js/faker';
 import { CourseEntity } from '../common';
 import { CourseItemComponent } from '../course-item/course-item.component';
+import { SharedModule } from '../shared/shared.module';
 
 import { CoursesListComponent } from './courses-list.component';
 
@@ -13,7 +14,8 @@ const course: CourseEntity = {
   title: faker.lorem.sentence(),
   creationDate: faker.date.recent(100),
   description: faker.lorem.paragraphs(3),
-  duration: faker.datatype.number(360)
+  duration: faker.datatype.number(360),
+  topRated: faker.datatype.boolean()
 };
 
 describe('CoursesListComponent', () => {
@@ -24,6 +26,7 @@ describe('CoursesListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CoursesListComponent, CourseItemComponent],
+      imports: [SharedModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [{ provide: Router, useValue: router }]
     }).compileComponents();

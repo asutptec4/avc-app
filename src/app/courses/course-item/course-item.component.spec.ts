@@ -5,6 +5,8 @@ import faker from '@faker-js/faker';
 import { first } from 'rxjs';
 
 import { CourseEntity } from '../common';
+import { DurationPipe } from '../shared/duration.pipe';
+import { SharedModule } from '../shared/shared.module';
 import { CourseItemComponent } from './course-item.component';
 
 const course: CourseEntity = {
@@ -12,7 +14,8 @@ const course: CourseEntity = {
   title: faker.lorem.sentence(),
   creationDate: faker.date.recent(100),
   description: faker.lorem.paragraphs(3),
-  duration: faker.datatype.number(360)
+  duration: faker.datatype.number(360),
+  topRated: faker.datatype.boolean()
 };
 
 describe('CourseItemComponent', () => {
@@ -22,6 +25,7 @@ describe('CourseItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CourseItemComponent],
+      imports: [SharedModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   });

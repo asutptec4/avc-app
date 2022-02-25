@@ -1,9 +1,21 @@
-<app-course-item
-  *ngFor="let course of courses; trackBy: courseTrackByFn"
-  [course]="course"
-  (deleteAction)="onDeleteAction(course)"
-  (editAction)="onEditAction(course)"
-></app-course-item>
+<ng-template #noDataTemplate>
+  <mat-card>
+    <mat-card-content align="center" color="primary"> {{ noDataTitle | uppercase }} </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-container *ngIf="courses.length > 0; else noDataTemplate">
+  <app-course-item
+    *ngFor="
+      let course of courses | orderBy: 'creationDate':'desc' | filter: ['title', 'description']:searchKey;
+      trackBy: courseTrackByFn
+    "
+    [course]="course"
+    (deleteAction)="onDeleteAction(course)"
+    (editAction)="onEditAction(course)"
+  ></app-course-item>
+</ng-container>
+
 <mat-card>
   <mat-card-content align="center">
     <button mat-button automation-id="courses-list-load-button" color="primary" (click)="onLoadMoreClick()">

@@ -1,7 +1,9 @@
-<mat-card>
-  <mat-card-title>{{ course.title }}</mat-card-title>
+<mat-card appHighlightCourse [course]="course" [ngClass]="{ 'course-item-top-course': course.topRated }">
+  <mat-card-title
+    >{{ course.title | uppercase }}<mat-icon *ngIf="course.topRated" class="course-item-top-course-icon">star</mat-icon>
+  </mat-card-title>
   <mat-card-subtitle class="course-item-subtitle">
-    <mat-icon aria-hidden="false" class="course-item-icon">watch_later</mat-icon>{{ course.duration }} min
+    <mat-icon aria-hidden="false" class="course-item-icon">watch_later</mat-icon>{{ course.duration | duration }}
     <span class="course-item-subtitle-spacer"></span>
     <mat-icon aria-hidden="false" class="course-item-icon">calendar_today </mat-icon>
     {{ course.creationDate | date: 'mediumDate' }}

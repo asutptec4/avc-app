@@ -1,6 +1,8 @@
+@import 'src/stylesheets/variables';
+
 .course-item-subtitle {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   .course-item-subtitle-spacer {
     width: 1rem;
@@ -10,4 +12,11 @@
 .course-item-icon {
   font-size: 20px;
   margin-right: 0.2rem;
+}
+
+.course-item-top-course {
+  background-color: $color-card-top-rated;
+}
+.course-item-top-course-icon {
+  color: #ffde03;
 }

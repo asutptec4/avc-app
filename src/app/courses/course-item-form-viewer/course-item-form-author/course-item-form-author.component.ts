@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 export interface Author {
@@ -9,7 +9,8 @@ export interface Author {
 @Component({
   selector: 'app-course-item-form-author',
   templateUrl: './course-item-form-author.component.html',
-  styleUrls: ['./course-item-form-author.component.scss']
+  styleUrls: ['./course-item-form-author.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseItemFormAuthorComponent {
   addOnBlur = true;
@@ -24,8 +25,8 @@ export class CourseItemFormAuthorComponent {
     event.chipInput!.clear();
   }
 
-  remove(fruit: Author): void {
-    const index = this.authors.indexOf(fruit);
+  remove(author: Author): void {
+    const index = this.authors.indexOf(author);
     if (index >= 0) {
       this.authors.splice(index, 1);
     }
