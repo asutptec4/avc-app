@@ -6,7 +6,7 @@ import { first } from 'rxjs';
 
 import { CourseEntity } from '../common';
 import { DurationPipe } from '../shared/duration.pipe';
-import { SharedModule } from '../shared/shared.module';
+import { CoursesSharedModule } from '../shared/courses-shared.module';
 import { CourseItemComponent } from './course-item.component';
 
 const course: CourseEntity = {
@@ -25,7 +25,7 @@ describe('CourseItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CourseItemComponent],
-      imports: [SharedModule],
+      imports: [CoursesSharedModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   });

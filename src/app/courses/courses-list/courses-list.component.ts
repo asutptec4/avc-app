@@ -1,25 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import faker from '@faker-js/faker';
 
 import { CourseEntity } from '../common';
-
-function generateCourses(count: number): CourseEntity[] {
-  const result = [];
-  for (let i = 0; i < count; i++) {
-    const course: CourseEntity = {
-      id: faker.datatype.uuid(),
-      title: faker.lorem.sentence(),
-      creationDate: faker.date.between('2022-01-01T00:00:00.000Z', '2022-04-01T00:00:00.000Z'),
-      description: faker.lorem.paragraphs(3),
-      duration: faker.datatype.number(360),
-      topRated: faker.datatype.boolean()
-    };
-    result.push(course);
-  }
-  console.log(result);
-  return result;
-}
+import { CoursesService } from '../service';
 
 @Component({
   selector: 'app-courses-list',
@@ -27,19 +10,28 @@ function generateCourses(count: number): CourseEntity[] {
   styleUrls: ['./courses-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CoursesListComponent {
+export class CoursesListComponent implements OnInit {
   @Input() searchKey: string = '';
-  courses: CourseEntity[] = [...generateCourses(3)];
+  courses: CourseEntity[] = [];
   noDataTitle = 'No data. Feel free to add new course.';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private coursesService: CoursesService) {}
+
+  ngOnInit(): void {
+    this.courses = this.coursesService.getAll();
+  }
 
   onLoadMoreClick(): void {
-    this.courses = [...this.courses, ...generateCourses(3)];
+    this.coursesService.loadMoreCourses();
+    this.courses = this.coursesService.getAll();
   }
 
   onDeleteAction(course: CourseEntity): void {
-    this.courses = this.courses.filter((c) => c.id !== course.id);
+    const confirm = window.confirm(`Are you sure you want to delete this ${course.title}?`);
+    if (confirm) {
+      this.coursesService.remove(course.id);
+      this.courses = this.coursesService.getAll();
+    }
   }
 
   onEditAction(course: CourseEntity): void {

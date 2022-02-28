@@ -13,7 +13,8 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesToolbarComponent } from './courses-toolbar/courses-toolbar.component';
 import { CoursesViewerComponent } from './courses-viewer/courses-viewer.component';
 import { CoursesComponent } from './courses.component';
-import { SharedModule } from './shared/shared.module';
+import { CoursesServiceModule } from './service/courses-service.module';
+import { CoursesSharedModule } from './shared/courses-shared.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     CommonModule,
     CoursesRoutingModule,
-    SharedModule,
+    CoursesServiceModule,
+    CoursesSharedModule,
     BreadcrumbsModule,
     MatCardModule,
     MatInputModule,

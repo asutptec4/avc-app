@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { HighlightCourseDirective } from './highlight-course.directive';
@@ -10,7 +9,6 @@ const exportList = [HighlightCourseDirective, DurationPipe, OrderByPipe, FilterP
 
 @NgModule({
   declarations: [...exportList],
-  imports: [CommonModule],
   exports: [...exportList]
 })
-export class SharedModule {}
+export class CoursesSharedModule {}

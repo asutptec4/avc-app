@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import faker from '@faker-js/faker';
 import { CourseEntity } from '../common';
 import { CourseItemComponent } from '../course-item/course-item.component';
-import { SharedModule } from '../shared/shared.module';
+import { CoursesSharedModule } from '../shared/courses-shared.module';
 
 import { CoursesListComponent } from './courses-list.component';
 
@@ -26,7 +26,7 @@ describe('CoursesListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CoursesListComponent, CourseItemComponent],
-      imports: [SharedModule],
+      imports: [CoursesSharedModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [{ provide: Router, useValue: router }]
     }).compileComponents();

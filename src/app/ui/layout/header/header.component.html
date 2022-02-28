@@ -1,11 +1,17 @@
+<ng-template #loginTemplate>
+  <div class="header-user-name"><mat-icon>person</mat-icon>{{ userName }}</div>
+</ng-template>
+
 <mat-toolbar color="primary">
   <a class="header-logo" [routerLink]="['']">
     <app-logo></app-logo>
   </a>
   <span class="header-spacer"></span>
-  <button mat-button aria-label="Login" automation-id="header-login-button" (click)="onLoginClick()">
-    <mat-icon>person</mat-icon>UserLogin
-  </button>
+  <ng-container *appIfAuthenticated="loginTemplate">
+    <button mat-button aria-label="Login" automation-id="header-login-button" [routerLink]="'login'">
+      <mat-icon>person</mat-icon>Login
+    </button>
+  </ng-container>
   <button mat-button aria-label="Logout" automation-id="header-logout-button" (click)="onLogoutClick()">
     <mat-icon>exit_to_app</mat-icon>Logout
   </button>

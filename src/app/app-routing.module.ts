@@ -10,6 +10,10 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: 'login',
+        loadChildren: (): Promise<any> => import('./login/login.module').then((modules) => modules.LoginModule)
+      },
+      {
         path: '',
         loadChildren: (): Promise<any> => import('./courses/courses.module').then((modules) => modules.CoursesModule)
       }

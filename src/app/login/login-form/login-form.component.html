@@ -1,0 +1,17 @@
+<mat-card class="login-form-container">
+  <mat-card-title>Login</mat-card-title>
+  <mat-form-field appearance="fill">
+    <mat-label>E-mail:</mat-label>
+    <input matInput required [(ngModel)]="userName" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Password:</mat-label>
+    <input matInput required />
+  </mat-form-field>
+  <mat-card-actions class="login-form-actions-container">
+    <a mat-button class="login-form-reset-lint" href="https://www.google.com/" target="_blank"> Forgot password? </a>
+    <button mat-raised-button automation-id="login-form-login-button" color="primary">
+      <mat-icon class="course-item-icon" (click)="onLoginClick()">login</mat-icon>Login
+    </button>
+  </mat-card-actions>
+</mat-card>

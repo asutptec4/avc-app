@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 
+import { CoreSharedModule } from '../../core/shared/core-shared.module';
 import { LogoModule } from '../logo/logo.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,6 +14,6 @@ import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [LayoutComponent, HeaderComponent, MainComponent, FooterComponent],
-  imports: [CommonModule, RouterModule, LogoModule, MatToolbarModule, MatIconModule, MatButtonModule]
+  imports: [CommonModule, RouterModule, LogoModule, MatToolbarModule, MatIconModule, MatButtonModule, CoreSharedModule]
 })
 export class LayoutModule {}
