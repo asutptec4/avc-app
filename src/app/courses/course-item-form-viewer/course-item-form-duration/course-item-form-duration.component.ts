@@ -6,4 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./course-item-form-duration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseItemFormDurationComponent {}
+export class CourseItemFormDurationComponent {
+  duration: number = 0;
+}

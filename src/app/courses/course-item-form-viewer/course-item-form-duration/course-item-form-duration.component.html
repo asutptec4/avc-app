@@ -1,4 +1,7 @@
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" class="course-item-form-duration-input">
   <mat-label>Duration</mat-label>
-  <input matInput required />
+  <input matInput required [(ngModel)]="duration" />
 </mat-form-field>
+<div class="course-item-form-duration-converted">
+  {{ duration | duration }}
+</div>

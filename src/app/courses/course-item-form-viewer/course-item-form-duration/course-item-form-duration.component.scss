@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.course-item-form-duration-input {
+  width: 30%;
+  margin-right: 1rem;
+}
+
+.course-item-form-duration-converted {
+  flex-grow: 1;
+}
