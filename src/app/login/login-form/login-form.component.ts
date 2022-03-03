@@ -15,9 +15,8 @@ export class LoginFormComponent {
 
   onLoginClick(): void {
     const isAuthenticated = this.authService.login(this.userName, this.userName);
-    console.log(isAuthenticated);
     if (isAuthenticated) {
-      this.router.navigate(['/courses']);
+      this.router.navigate(['']);
     }
   }
 }

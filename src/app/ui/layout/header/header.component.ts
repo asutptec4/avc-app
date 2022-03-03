@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { map, Observable } from 'rxjs';
+
 import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
@@ -7,14 +9,10 @@ import { AuthService } from '../../../core/auth/auth.service';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit {
-  userName: string = '';
+export class HeaderComponent {
+  userName: Observable<string | undefined> = this.authService.currentUser.pipe(map((user) => user?.firstName));
 
   constructor(private authService: AuthService) {}
-
-  ngOnInit(): void {
-    this.userName = this.authService.getUserInfo() ?? '';
-  }
 
   onLogoutClick(): void {
     this.authService.logout();

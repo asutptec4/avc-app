@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { CourseEntity } from '../common';
 import { CoursesService } from '../service';
@@ -15,7 +15,7 @@ export class CoursesListComponent implements OnInit {
   courses: CourseEntity[] = [];
   noDataTitle = 'No data. Feel free to add new course.';
 
-  constructor(private router: Router, private coursesService: CoursesService) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private coursesService: CoursesService) {}
 
   ngOnInit(): void {
     this.courses = this.coursesService.getAll();
@@ -35,7 +35,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   onEditAction(course: CourseEntity): void {
-    this.router.navigate([course.id]);
+    this.router.navigate([course.id], { relativeTo: this.activatedRoute });
   }
 
   courseTrackByFn(index: number, course: CourseEntity): string {

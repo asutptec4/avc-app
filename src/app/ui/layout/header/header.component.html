@@ -1,5 +1,5 @@
 <ng-template #loginTemplate>
-  <div class="header-user-name"><mat-icon>person</mat-icon>{{ userName }}</div>
+  <div class="header-user-name"><mat-icon>person</mat-icon>{{ userName | async }}</div>
 </ng-template>
 
 <mat-toolbar color="primary">
@@ -12,7 +12,13 @@
       <mat-icon>person</mat-icon>Login
     </button>
   </ng-container>
-  <button mat-button aria-label="Logout" automation-id="header-logout-button" (click)="onLogoutClick()">
+  <button
+    mat-button
+    aria-label="Logout"
+    automation-id="header-logout-button"
+    [routerLink]="['']"
+    (click)="onLogoutClick()"
+  >
     <mat-icon>exit_to_app</mat-icon>Logout
   </button>
 </mat-toolbar>
