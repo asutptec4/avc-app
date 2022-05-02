@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, Subject } from 'rxjs';
-import { BreadcrumbsService } from '../../ui/breadcrumbs/breadcrumbs.service';
 
+import { BreadcrumbsService } from '../../ui/breadcrumbs/breadcrumbs.service';
 import { CourseEntity } from '../common';
 import { CoursesService } from '../service';
 

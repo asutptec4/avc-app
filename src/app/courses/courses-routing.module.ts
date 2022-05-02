@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from '../core/auth/auth.guard';
 import { CoursesViewerComponent } from './courses-viewer/courses-viewer.component';
 import { CoursesComponent } from './courses.component';
 
@@ -15,6 +16,7 @@ const routes: Routes = [
       },
       {
         path: ':id',
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./course-item-form-viewer/course-item-form-viewer.module').then(
             (mod) => mod.CourseItemFormViewerModule
