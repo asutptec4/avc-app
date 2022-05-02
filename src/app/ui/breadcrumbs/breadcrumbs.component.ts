@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { BreadcrumbsService } from './breadcrumbs.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -6,4 +9,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./breadcrumbs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbsComponent {}
+export class BreadcrumbsComponent {
+  crumbs: Observable<string[]> = this.breadcrumbsService.crumbs;
+
+  constructor(private breadcrumbsService: BreadcrumbsService) {}
+}

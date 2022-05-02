@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, Subject } from 'rxjs';
+import { BreadcrumbsService } from '../../ui/breadcrumbs/breadcrumbs.service';
 
 import { CourseEntity } from '../common';
 import { CoursesService } from '../service';
@@ -16,7 +17,12 @@ export class CourseItemFormViewerComponent implements OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private activatedRoute: ActivatedRoute, private coursesService: CoursesService) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private coursesService: CoursesService,
+    private breadcrumbsService: BreadcrumbsService
+  ) {
     this.activatedRoute.params
       .pipe(
         filter((params) => params['id']),
@@ -25,9 +31,15 @@ export class CourseItemFormViewerComponent implements OnDestroy {
       .subscribe((id) => {
         const course = this.coursesService.getById(id);
         if (course) {
+          this.breadcrumbsService.updateCrumbs(['Courses', course.title]);
           this.course = course;
         }
       });
+  }
+
+  onSaveClick(): void {
+    this.router.navigate(['']);
+    this.breadcrumbsService.updateCrumbs(['Courses']);
   }
 
   ngOnDestroy(): void {

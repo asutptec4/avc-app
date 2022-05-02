@@ -1,11 +1,11 @@
 <mat-card class="course-item-form-viewer-container">
   <mat-card-title>New Course</mat-card-title>
-  <app-course-item-form></app-course-item-form>
+  <app-course-item-form [course]="course"></app-course-item-form>
   <mat-card-actions align="end" class="course-item-form-viewer-actions">
     <button mat-raised-button automation-id="course-item-cancel-button" color="secondary" [routerLink]="['']">
       <mat-icon class="course-item-icon">cancel</mat-icon>Cancel
     </button>
-    <button mat-raised-button automation-id="course-item-save-button" color="primary">
+    <button mat-raised-button automation-id="course-item-save-button" color="primary" (click)="onSaveClick()">
       <mat-icon class="course-item-icon">save</mat-icon>Save
     </button>
   </mat-card-actions>

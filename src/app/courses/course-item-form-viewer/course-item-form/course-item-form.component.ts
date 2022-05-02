@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+import { CourseEntity } from '../../common';
 
 @Component({
   selector: 'app-course-item-form',
@@ -6,4 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./course-item-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseItemFormComponent {}
+export class CourseItemFormComponent {
+  @Input() course!: CourseEntity;
+}
