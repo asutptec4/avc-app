@@ -10,7 +10,7 @@ import { AuthService } from '../../../core/auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  userName: Observable<string | undefined> = this.authService.currentUser.pipe(map((user) => user?.firstName));
+  userName: Observable<string | undefined> = this.authService.currentUser.pipe(map((user) => user?.login));
 
   constructor(private authService: AuthService) {}
 

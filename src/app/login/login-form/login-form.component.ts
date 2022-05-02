@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+
 import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
@@ -10,13 +12,20 @@ import { AuthService } from '../../core/auth/auth.service';
 })
 export class LoginFormComponent {
   userName: string = '';
+  showError: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private _snackBar: MatSnackBar) {}
 
   onLoginClick(): void {
-    const isAuthenticated = this.authService.login(this.userName, this.userName);
-    if (isAuthenticated) {
-      this.router.navigate(['']);
-    }
+    this.authService.login(this.userName, this.userName).subscribe((isAuthenticated) => {
+      this.showError = !isAuthenticated;
+      if (isAuthenticated) {
+        this.router.navigate(['']);
+      } else {
+        this._snackBar.open('Login or password are incorrect', 'Hide', {
+          duration: 3000
+        });
+      }
+    });
   }
 }

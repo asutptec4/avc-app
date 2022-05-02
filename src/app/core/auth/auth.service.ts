@@ -1,9 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, shareReplay, Subject } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, ReplaySubject, Subject, tap } from 'rxjs';
 
 import { UserEntity } from '../common';
+import { UserAuth } from '../common/user-auth.interface';
 
-const USER_STORAGE_KEY = 'user';
+const TOKEN_STORAGE_KEY = 'token';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +17,25 @@ export class AuthService {
   private isAuthenticatedSubject: Subject<boolean> = new BehaviorSubject<boolean>(false);
   isAuthenticated: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-  constructor() {
-    const user = this.getUserInfo();
-    this.updateCurrentUser(user);
+  constructor(private http: HttpClient) {
+    const token = this.getToken();
+    if (token) {
+      this.updateCurrentUserAsync(token);
+    }
+  }
+
+  private getToken(): string | null {
+    return localStorage.getItem(TOKEN_STORAGE_KEY);
+  }
+
+  private updateCurrentUserAsync(token: string) {
+    this.getUserInfo(token).subscribe((user) => this.updateCurrentUser(user));
+  }
+
+  private getUserInfo(token: string): Observable<UserEntity | null> {
+    return this.http
+      .post<UserEntity>('http://localhost:3004/auth/userinfo', { token })
+      .pipe(catchError(() => of(null)));
   }
 
   private updateCurrentUser(user: UserEntity | null) {
@@ -25,22 +43,19 @@ export class AuthService {
     this.currentUserSubject.next(user);
   }
 
-  login(username: string, password: string): boolean {
-    localStorage.setItem(USER_STORAGE_KEY, username);
-    this.updateCurrentUser(this.getUserInfo());
-    return true;
+  login(username: string, password: string): Observable<boolean> {
+    return this.http.post<UserAuth>('http://localhost:3004/auth/login', { login: username, password: password }).pipe(
+      tap((res) => {
+        localStorage.setItem(TOKEN_STORAGE_KEY, res.token);
+        this.updateCurrentUserAsync(res.token);
+      }),
+      map((res) => !!res.token),
+      catchError(() => of(false))
+    );
   }
 
   logout(): void {
-    localStorage.removeItem(USER_STORAGE_KEY);
+    localStorage.removeItem(TOKEN_STORAGE_KEY);
     this.updateCurrentUser(null);
-  }
-
-  getUserInfo(): UserEntity | null {
-    const userName = localStorage.getItem(USER_STORAGE_KEY);
-    if (userName) {
-      return { id: userName, firstName: userName, lastName: userName };
-    }
-    return null;
   }
 }
