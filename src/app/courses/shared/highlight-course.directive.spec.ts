@@ -39,7 +39,7 @@ describe('HighlightCourseDirective', () => {
   it('should set border for upcoming courses', () => {
     const creationDate = new Date();
     creationDate.setDate(creationDate.getDate() + 1);
-    component.course = { creationDate } as CourseEntity;
+    component.course = { date: creationDate } as CourseEntity;
     fixture.detectChanges();
     const div: HTMLElement = fixture.nativeElement.querySelector('div');
     expect(div.style.borderColor).toBe(UPCOMING_COURSE_BORDER_COLOR);
@@ -48,7 +48,7 @@ describe('HighlightCourseDirective', () => {
   it('should set border for recent courses', () => {
     const creationDate = new Date();
     creationDate.setDate(creationDate.getDate() - 1);
-    component.course = { creationDate } as CourseEntity;
+    component.course = { date: creationDate } as CourseEntity;
     fixture.detectChanges();
     const div: HTMLElement = fixture.nativeElement.querySelector('div');
     expect(div.style.borderColor).toBe(FRESH_COURSE_BORDER_COLOR);
@@ -57,7 +57,7 @@ describe('HighlightCourseDirective', () => {
   it('should not set border for old courses', () => {
     const creationDate = new Date();
     creationDate.setDate(creationDate.getDate() - 16);
-    component.course = { creationDate } as CourseEntity;
+    component.course = { date: creationDate } as CourseEntity;
     fixture.detectChanges();
     const div: HTMLElement = fixture.nativeElement.querySelector('div');
     expect(div.style.borderColor).toBe('');

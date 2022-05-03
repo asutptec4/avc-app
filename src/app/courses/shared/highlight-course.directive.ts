@@ -17,7 +17,7 @@ export class HighlightCourseDirective {
 
   private getColorByDate(): string {
     const now = Date.now();
-    const courseCreationTime = this.course?.creationDate.getTime() || 0;
+    const courseCreationTime = this.course?.date.getTime() || 0;
     let color = '';
     if (courseCreationTime > now) {
       color = UPCOMING_COURSE_BORDER_COLOR;

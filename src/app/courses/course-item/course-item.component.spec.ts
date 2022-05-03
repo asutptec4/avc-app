@@ -11,11 +11,12 @@ import { CourseItemComponent } from './course-item.component';
 
 const course: CourseEntity = {
   id: faker.datatype.uuid(),
-  title: faker.lorem.sentence(),
-  creationDate: faker.date.recent(100),
+  name: faker.lorem.sentence(),
+  date: faker.date.recent(100),
   description: faker.lorem.paragraphs(3),
-  duration: faker.datatype.number(360),
-  topRated: faker.datatype.boolean()
+  length: faker.datatype.number(360),
+  isTopRated: faker.datatype.boolean(),
+  authors: []
 };
 
 describe('CourseItemComponent', () => {

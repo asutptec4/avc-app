@@ -31,7 +31,7 @@ export class CourseItemFormViewerComponent implements OnDestroy {
       .subscribe((id) => {
         const course = this.coursesService.getById(id);
         if (course) {
-          this.breadcrumbsService.updateCrumbs(['Courses', course.title]);
+          this.breadcrumbsService.updateCrumbs(['Courses', course.name]);
           this.course = course;
         }
       });

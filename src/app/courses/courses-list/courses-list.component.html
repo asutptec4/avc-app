@@ -7,7 +7,7 @@
 <ng-container *ngIf="courses.length > 0; else noDataTemplate">
   <app-course-item
     *ngFor="
-      let course of courses | orderBy: 'creationDate':'desc' | filter: ['title', 'description']:searchKey;
+      let course of courses | orderBy: 'date':'desc' | filter: ['name', 'description']:searchKey;
       trackBy: courseTrackByFn
     "
     [course]="course"

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 import { CourseEntity } from '../common';
 import { CoursesService } from '../service';
@@ -15,22 +16,35 @@ export class CoursesListComponent implements OnInit {
   courses: CourseEntity[] = [];
   noDataTitle = 'No data. Feel free to add new course.';
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private coursesService: CoursesService) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private coursesService: CoursesService,
+    private readonly changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.courses = this.coursesService.getAll();
+    this.coursesService
+      .getAll({})
+      .pipe(
+        tap((courses) => {
+          this.courses = courses;
+          this.changeDetectorRef.markForCheck();
+        })
+      )
+      .subscribe();
   }
 
   onLoadMoreClick(): void {
     this.coursesService.loadMoreCourses();
-    this.courses = this.coursesService.getAll();
+    this.courses = this.coursesService.getAllMocked();
   }
 
   onDeleteAction(course: CourseEntity): void {
-    const confirm = window.confirm(`Are you sure you want to delete this ${course.title}?`);
+    const confirm = window.confirm(`Are you sure you want to delete this ${course.name}?`);
     if (confirm) {
       this.coursesService.remove(course.id);
-      this.courses = this.coursesService.getAll();
+      this.courses = this.coursesService.getAllMocked();
     }
   }
 

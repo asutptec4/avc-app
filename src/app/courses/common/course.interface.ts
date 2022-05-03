@@ -1,22 +1,37 @@
 export interface CourseEntity {
   id: string;
-  title: string;
-  creationDate: Date;
-  duration: number;
+  name: string;
   description: string;
-  topRated: boolean;
+  isTopRated: boolean;
+  date: Date;
+  length: number;
+  authors: Author[];
 }
 
 export interface NewCourse {
-  title: string;
-  duration: number;
+  name: string;
+  length: number;
   description: string;
 }
 
 export interface UpdatedCourse {
   id: string;
-  title: string;
-  duration: number;
+  name: string;
+  length: number;
   description: string;
-  topRated: boolean;
+  isTopRated: boolean;
+}
+
+export interface Author {
+  id: string;
+  name: string;
+  lastName: string;
+}
+
+export interface CourseApiParams {
+  start?: string;
+  count?: string;
+  sort?: string;
+  textFragment?: string;
+  id?: string;
 }
