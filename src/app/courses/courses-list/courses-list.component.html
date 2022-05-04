@@ -6,10 +6,7 @@
 
 <ng-container *ngIf="courses.length > 0; else noDataTemplate">
   <app-course-item
-    *ngFor="
-      let course of courses | orderBy: 'date':'desc' | filter: ['name', 'description']:searchKey;
-      trackBy: courseTrackByFn
-    "
+    *ngFor="let course of courses | orderBy: 'date':'desc'; trackBy: courseTrackByFn"
     [course]="course"
     (deleteAction)="onDeleteAction(course)"
     (editAction)="onEditAction(course)"
@@ -18,8 +15,14 @@
 
 <mat-card>
   <mat-card-content align="center">
-    <button mat-button automation-id="courses-list-load-button" color="primary" (click)="onLoadMoreClick()">
-      Load more
+    <button
+      mat-button
+      automation-id="courses-list-load-button"
+      color="primary"
+      (click)="onLoadMoreClick()"
+      [disabled]="isLoadDisabled"
+    >
+      {{ isLoadDisabled ? 'No more' : 'Load more' }}
     </button>
   </mat-card-content>
 </mat-card>

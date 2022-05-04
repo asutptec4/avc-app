@@ -14,14 +14,6 @@ export interface NewCourse {
   description: string;
 }
 
-export interface UpdatedCourse {
-  id: string;
-  name: string;
-  length: number;
-  description: string;
-  isTopRated: boolean;
-}
-
 export interface Author {
   id: string;
   name: string;
@@ -29,8 +21,8 @@ export interface Author {
 }
 
 export interface CourseApiParams {
-  start?: string;
-  count?: string;
+  start?: number;
+  count?: number;
   sort?: string;
   textFragment?: string;
   id?: string;
