@@ -6,11 +6,12 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InterceptorModule } from './core/interceptor/interceptor.module';
 import { CustomRouteReuseStrategy } from './core/route-reuse-strategy/custom-route-reuse-strategy';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, HttpClientModule, InterceptorModule],
   providers: [{ provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy }],
   bootstrap: [AppComponent]
 })

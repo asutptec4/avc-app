@@ -5,7 +5,7 @@ import { BehaviorSubject, catchError, map, Observable, of, ReplaySubject, Subjec
 import { UserEntity } from '../common';
 import { UserAuth } from '../common/user-auth.interface';
 
-const TOKEN_STORAGE_KEY = 'token';
+export const TOKEN_STORAGE_KEY = 'token';
 
 @Injectable({
   providedIn: 'root'
