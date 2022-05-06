@@ -21,7 +21,7 @@ export class IfAuthenticatedDirective implements OnInit, OnDestroy {
   private loginViewRef: EmbeddedViewRef<any> | null = null;
   private logoutViewRef: EmbeddedViewRef<any> | null = null;
 
-  private readonly destroy$ = new Subject<void>();
+  private readonly destroy = new Subject<void>();
 
   @Input() set appIfAuthenticated(templateRef: TemplateRef<any>) {
     this.loginTemplateRef = templateRef;
@@ -38,12 +38,12 @@ export class IfAuthenticatedDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.destroy.next();
+    this.destroy.complete();
   }
 
   ngOnInit(): void {
-    this.authService.isAuthenticated.pipe(takeUntil(this.destroy$)).subscribe((isAuthenticated) => {
+    this.authService.isAuthenticated.pipe(takeUntil(this.destroy)).subscribe((isAuthenticated) => {
       this.updateView(isAuthenticated);
     });
   }
