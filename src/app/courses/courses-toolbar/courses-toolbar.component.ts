@@ -13,11 +13,11 @@ const SEARCH_MIN_LENGTH = 3;
 export class CoursesToolbarComponent implements OnInit, OnDestroy {
   @Output() searchKey: EventEmitter<string> = new EventEmitter();
 
-  private readonly destroy$ = new Subject<void>();
-  private readonly searchStr$: Subject<string> = new Subject();
+  private readonly destroy = new Subject<void>();
+  private readonly searchStr: Subject<string> = new Subject();
 
   ngOnInit(): void {
-    this.searchStr$
+    this.searchStr
       .asObservable()
       .pipe(
         filter((searchStr) => !searchStr || (!!searchStr && searchStr.length > SEARCH_MIN_LENGTH)),
@@ -30,11 +30,11 @@ export class CoursesToolbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.destroy.next();
+    this.destroy.complete();
   }
 
   onSearchKeyUp(input: KeyboardEvent): void {
-    this.searchStr$.next((input?.target as HTMLInputElement).value);
+    this.searchStr.next((input?.target as HTMLInputElement).value);
   }
 }

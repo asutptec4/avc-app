@@ -15,7 +15,7 @@ import { CoursesService } from '../service';
 export class CourseItemFormViewerComponent implements OnDestroy {
   course: CourseEntity = {} as CourseEntity;
 
-  private readonly destroy$ = new Subject<void>();
+  private readonly destroy = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,7 +41,7 @@ export class CourseItemFormViewerComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.destroy.next();
+    this.destroy.complete();
   }
 }

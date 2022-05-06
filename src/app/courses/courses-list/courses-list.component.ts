@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { AuthService } from '../../core/auth/auth.service';
 
 import { CourseEntity } from '../common';
 import { CoursesService } from '../service';
@@ -31,7 +32,8 @@ export class CoursesListComponent implements OnInit, OnChanges {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private coursesService: CoursesService,
-    private readonly changeDetectorRef: ChangeDetectorRef
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -99,16 +101,18 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
 
   onDeleteAction(course: CourseEntity): void {
-    const confirm = window.confirm(`Are you sure you want to delete this ${course.name}?`);
-    if (confirm) {
-      this.coursesService
-        .remove(course.id)
-        .pipe(
-          tap(() => {
-            this.makeSearch();
-          })
-        )
-        .subscribe();
+    if (this.authService.isUserAuthenticated()) {
+      const confirm = window.confirm(`Are you sure you want to delete this ${course.name}?`);
+      if (confirm) {
+        this.coursesService
+          .remove(course.id)
+          .pipe(
+            tap(() => {
+              this.makeSearch();
+            })
+          )
+          .subscribe();
+      }
     }
   }
 
