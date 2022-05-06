@@ -9,9 +9,10 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
-import { AuthService } from '../../core/auth/auth.service';
 
-import { CourseEntity } from '../common';
+import { AuthService } from '../../core/auth/auth.service';
+import { GlobalSpinnerService } from '../../core/spinner/global-spinner/global-spinner.service';
+import { CourseApiParams, CourseEntity } from '../common';
 import { CoursesService } from '../service';
 
 @Component({
@@ -33,7 +34,8 @@ export class CoursesListComponent implements OnInit, OnChanges {
     private activatedRoute: ActivatedRoute,
     private coursesService: CoursesService,
     private readonly changeDetectorRef: ChangeDetectorRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private spinner: GlobalSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -41,12 +43,18 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
 
   private fetchAndUpdateCourses(): void {
+    this.fetchCourses({ start: this.startIndex, count: this.count }, this.updateCourses.bind(this));
+  }
+
+  private fetchCourses(params: CourseApiParams, onLoadHandler: (courses: CourseEntity[]) => void): void {
+    this.spinner.show();
     this.coursesService
-      .getAll({ start: this.startIndex, count: this.count })
+      .getAll(params)
       .pipe(
         tap((courses) => {
-          this.updateCourses(courses);
-        })
+          onLoadHandler(courses);
+        }),
+        tap(() => this.spinner.hide())
       )
       .subscribe();
   }
@@ -83,16 +91,11 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
 
   private fetchBySearch() {
-    this.coursesService
-      .getAll({ textFragment: this.searchKey })
-      .pipe(
-        tap((courses) => {
-          this.courses = courses;
-          this.isLoadDisabled = true;
-          this.changeDetectorRef.markForCheck();
-        })
-      )
-      .subscribe();
+    this.fetchCourses({ textFragment: this.searchKey }, (courses) => {
+      this.courses = courses;
+      this.isLoadDisabled = true;
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   onLoadMoreClick(): void {
@@ -102,17 +105,23 @@ export class CoursesListComponent implements OnInit, OnChanges {
 
   onDeleteAction(course: CourseEntity): void {
     if (this.authService.isUserAuthenticated()) {
-      const confirm = window.confirm(`Are you sure you want to delete this ${course.name}?`);
-      if (confirm) {
-        this.coursesService
-          .remove(course.id)
-          .pipe(
-            tap(() => {
-              this.makeSearch();
-            })
-          )
-          .subscribe();
-      }
+      this.deleteCourse(course);
+    }
+  }
+
+  private deleteCourse(course: CourseEntity): void {
+    const confirm = window.confirm(`Are you sure you want to delete this ${course.name}?`);
+    if (confirm) {
+      this.spinner.show();
+      this.coursesService
+        .remove(course.id)
+        .pipe(
+          tap(() => {
+            this.makeSearch();
+          }),
+          tap(() => this.spinner.hide())
+        )
+        .subscribe();
     }
   }
 

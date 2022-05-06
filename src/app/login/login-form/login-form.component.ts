@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { UserService } from '../../core/common';
+import { GlobalSpinnerService } from '../../core/spinner/global-spinner/global-spinner.service';
 
 @Component({
   selector: 'app-login-form',
@@ -15,9 +16,15 @@ export class LoginFormComponent {
   password: string = '';
   showError: boolean = false;
 
-  constructor(private router: Router, private userService: UserService, private snackBar: MatSnackBar) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    private spinner: GlobalSpinnerService
+  ) {}
 
   onLoginClick(): void {
+    this.spinner.show();
     this.userService.login(this.userName, this.password).subscribe((isAuthenticated) => {
       this.showError = !isAuthenticated;
       if (isAuthenticated) {
@@ -27,6 +34,7 @@ export class LoginFormComponent {
           duration: 3000
         });
       }
+      this.spinner.hide();
     });
   }
 }
