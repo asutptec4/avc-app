@@ -8,10 +8,11 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
 
 import { AuthService } from '../../core/auth/auth.service';
-import { GlobalSpinnerService } from '../../core/spinner/global-spinner/global-spinner.service';
+import { hide, show } from '../../core/spinner/global-spinner/state/global-spinner.actions';
 import { CourseApiParams, CourseEntity } from '../common';
 import { CoursesService } from '../service';
 
@@ -35,7 +36,7 @@ export class CoursesListComponent implements OnInit, OnChanges {
     private coursesService: CoursesService,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private authService: AuthService,
-    private spinner: GlobalSpinnerService
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -47,14 +48,14 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
 
   private fetchCourses(params: CourseApiParams, onLoadHandler: (courses: CourseEntity[]) => void): void {
-    this.spinner.show();
+    this.store.dispatch(show());
     this.coursesService
       .getAll(params)
       .pipe(
         tap((courses) => {
           onLoadHandler(courses);
         }),
-        tap(() => this.spinner.hide())
+        tap(() => this.store.dispatch(hide()))
       )
       .subscribe();
   }
@@ -112,14 +113,14 @@ export class CoursesListComponent implements OnInit, OnChanges {
   private deleteCourse(course: CourseEntity): void {
     const confirm = window.confirm(`Are you sure you want to delete this ${course.name}?`);
     if (confirm) {
-      this.spinner.show();
+      this.store.dispatch(show());
       this.coursesService
         .remove(course.id)
         .pipe(
           tap(() => {
             this.makeSearch();
           }),
-          tap(() => this.spinner.hide())
+          tap(() => this.store.dispatch(hide()))
         )
         .subscribe();
     }

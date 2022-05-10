@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { UserService } from '../../core/common';
-import { GlobalSpinnerService } from '../../core/spinner/global-spinner/global-spinner.service';
+import { hide, show } from '../../core/spinner/global-spinner/state/global-spinner.actions';
 
 @Component({
   selector: 'app-login-form',
@@ -20,11 +21,11 @@ export class LoginFormComponent {
     private router: Router,
     private userService: UserService,
     private snackBar: MatSnackBar,
-    private spinner: GlobalSpinnerService
+    private store: Store
   ) {}
 
   onLoginClick(): void {
-    this.spinner.show();
+    this.store.dispatch(show());
     this.userService.login(this.userName, this.password).subscribe((isAuthenticated) => {
       this.showError = !isAuthenticated;
       if (isAuthenticated) {
@@ -34,7 +35,7 @@ export class LoginFormComponent {
           duration: 3000
         });
       }
-      this.spinner.hide();
+      this.store.dispatch(hide());
     });
   }
 }

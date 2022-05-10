@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { GlobalSpinnerService } from './global-spinner.service';
+import { selectIsVisible } from './state/global-spinner.reducer';
 
 @Component({
   selector: 'app-global-spinner',
@@ -9,7 +10,7 @@ import { GlobalSpinnerService } from './global-spinner.service';
   styleUrls: ['./global-spinner.component.scss']
 })
 export class GlobalSpinnerComponent {
-  isVisible: Observable<boolean> = this.globalSpinnerService.isVisible;
+  isVisible: Observable<boolean> = this.store.select(selectIsVisible);
 
-  constructor(private globalSpinnerService: GlobalSpinnerService) {}
+  constructor(private store: Store) {}
 }
