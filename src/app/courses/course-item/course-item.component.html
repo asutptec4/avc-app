@@ -13,10 +13,22 @@
     <p>{{ course.description }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
-    <button mat-raised-button automation-id="course-item-edit-button" color="primary" (click)="onEditClick()">
+    <button
+      mat-raised-button
+      automation-id="course-item-edit-button"
+      color="primary"
+      [disabled]="isActionsDisabled"
+      (click)="onEditClick()"
+    >
       <mat-icon class="course-item-icon">edit</mat-icon>Edit
     </button>
-    <button mat-raised-button automation-id="course-item-delete-button" color="primary" (click)="onDeleteClick()">
+    <button
+      mat-raised-button
+      automation-id="course-item-delete-button"
+      color="primary"
+      [disabled]="isActionsDisabled"
+      (click)="onDeleteClick()"
+    >
       <mat-icon class="course-item-icon">delete</mat-icon>Delete
     </button>
   </mat-card-actions>

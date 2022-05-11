@@ -8,9 +8,10 @@ import {
   TemplateRef,
   ViewContainerRef
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 
-import { AuthService } from '../auth/auth.service';
+import { selectIsAuthenticated } from '../auth';
 
 @Directive({
   selector: '[appIfAuthenticated]'
@@ -32,7 +33,7 @@ export class IfAuthenticatedDirective implements OnInit, OnDestroy {
     templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
     private changeDetector: ChangeDetectorRef,
-    private authService: AuthService
+    private store: Store
   ) {
     this.logoutTemplateRef = templateRef;
   }
@@ -43,9 +44,12 @@ export class IfAuthenticatedDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authService.isAuthenticated.pipe(takeUntil(this.destroy)).subscribe((isAuthenticated) => {
-      this.updateView(isAuthenticated);
-    });
+    this.store
+      .select(selectIsAuthenticated)
+      .pipe(takeUntil(this.destroy))
+      .subscribe((isAuthenticated) => {
+        this.updateView(isAuthenticated);
+      });
   }
 
   private updateView(isAuthenticated: boolean): void {

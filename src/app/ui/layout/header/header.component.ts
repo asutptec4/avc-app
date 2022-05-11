@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { UserService } from '../../../core/common';
+import { logout, selectUserName } from '../../../core/auth';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +11,11 @@ import { UserService } from '../../../core/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  userName: Observable<string | undefined> = this.userService.currentUser.pipe(map((user) => user?.login));
+  userName: Observable<string | undefined> = this.store.select(selectUserName);
 
-  constructor(private userService: UserService) {}
+  constructor(private store: Store) {}
 
   onLogoutClick(): void {
-    this.userService.logout();
+    this.store.dispatch(logout());
   }
 }

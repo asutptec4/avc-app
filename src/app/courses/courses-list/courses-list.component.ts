@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
-import { AuthService } from '../../core/auth/auth.service';
+import { selectIsAuthenticated } from '../../core/auth';
 import { hide, show } from '../../core/spinner/global-spinner/state/global-spinner.actions';
 import { CourseApiParams, CourseEntity } from '../common';
 import { CoursesService } from '../service';
@@ -25,6 +25,7 @@ import { CoursesService } from '../service';
 export class CoursesListComponent implements OnInit, OnChanges {
   @Input() searchKey: string = '';
   courses: CourseEntity[] = [];
+  isActionsDisabled: Observable<boolean> = this.store.select(selectIsAuthenticated);
   isLoadDisabled: boolean = false;
   noDataTitle = 'No data. Feel free to add new course.';
   private startIndex: number = 0;
@@ -35,7 +36,6 @@ export class CoursesListComponent implements OnInit, OnChanges {
     private activatedRoute: ActivatedRoute,
     private coursesService: CoursesService,
     private readonly changeDetectorRef: ChangeDetectorRef,
-    private authService: AuthService,
     private store: Store
   ) {}
 
@@ -105,9 +105,7 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
 
   onDeleteAction(course: CourseEntity): void {
-    if (this.authService.isUserAuthenticated()) {
-      this.deleteCourse(course);
-    }
+    this.deleteCourse(course);
   }
 
   private deleteCourse(course: CourseEntity): void {

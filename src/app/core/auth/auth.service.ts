@@ -1,20 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { UserService } from '../common';
+import { UserAuth, UserCredentials, UserEntity } from '../common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  isAuthenticated: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+  constructor(private http: HttpClient) {}
 
-  constructor(private userService: UserService) {
-    this.userService.currentUser.pipe(tap((user) => this.isAuthenticatedSubject.next(user ? true : false))).subscribe();
+  getUserInfo(token: string): Observable<UserEntity> {
+    return this.http.post<UserEntity>('http://localhost:3004/auth/userinfo', { token });
   }
 
-  isUserAuthenticated(): boolean {
-    return this.isAuthenticatedSubject.getValue();
+  login(credentials: UserCredentials): Observable<UserAuth> {
+    return this.http.post<UserAuth>('http://localhost:3004/auth/login', {
+      login: credentials.username,
+      password: credentials.password
+    });
   }
 }

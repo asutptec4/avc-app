@@ -10,6 +10,7 @@ import { CourseEntity } from '../common';
 })
 export class CourseItemComponent {
   @Input() course!: CourseEntity;
+  @Input() isActionsDisabled: boolean = false;
   @Output() editAction: EventEmitter<void> = new EventEmitter();
   @Output() deleteAction: EventEmitter<void> = new EventEmitter();
 

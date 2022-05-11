@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { filter, tap } from 'rxjs';
 
-import { UserService } from '../../core/common';
-import { hide, show } from '../../core/spinner/global-spinner/state/global-spinner.actions';
+import { login, selectError } from '../../core/auth';
 
 @Component({
   selector: 'app-login-form',
@@ -12,30 +11,28 @@ import { hide, show } from '../../core/spinner/global-spinner/state/global-spinn
   styleUrls: ['./login-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   userName: string = '';
   password: string = '';
   showError: boolean = false;
 
-  constructor(
-    private router: Router,
-    private userService: UserService,
-    private snackBar: MatSnackBar,
-    private store: Store
-  ) {}
+  constructor(private snackBar: MatSnackBar, private store: Store) {}
+
+  ngOnInit(): void {
+    this.store
+      .select(selectError)
+      .pipe(
+        filter((error) => !!error),
+        tap(() => {
+          this.snackBar.open('Login or password are incorrect', 'Hide', {
+            duration: 3000
+          });
+        })
+      )
+      .subscribe();
+  }
 
   onLoginClick(): void {
-    this.store.dispatch(show());
-    this.userService.login(this.userName, this.password).subscribe((isAuthenticated) => {
-      this.showError = !isAuthenticated;
-      if (isAuthenticated) {
-        this.router.navigate(['']);
-      } else {
-        this.snackBar.open('Login or password are incorrect', 'Hide', {
-          duration: 3000
-        });
-      }
-      this.store.dispatch(hide());
-    });
+    this.store.dispatch(login({ credentials: { username: this.userName, password: this.password } }));
   }
 }
