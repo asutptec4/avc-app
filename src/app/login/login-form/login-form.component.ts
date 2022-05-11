@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { filter, tap } from 'rxjs';
 
-import { login, selectError } from '../../core/auth';
+import { AuthService, login, selectError } from '../../core/auth';
 
 @Component({
   selector: 'app-login-form',
@@ -14,13 +14,11 @@ import { login, selectError } from '../../core/auth';
 export class LoginFormComponent implements OnInit {
   userName: string = '';
   password: string = '';
-  showError: boolean = false;
 
-  constructor(private snackBar: MatSnackBar, private store: Store) {}
+  constructor(private snackBar: MatSnackBar, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.store
-      .select(selectError)
+    this.authService.authError
       .pipe(
         filter((error) => !!error),
         tap(() => {
@@ -33,6 +31,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   onLoginClick(): void {
-    this.store.dispatch(login({ credentials: { username: this.userName, password: this.password } }));
+    this.authService.login({ username: this.userName, password: this.password });
   }
 }

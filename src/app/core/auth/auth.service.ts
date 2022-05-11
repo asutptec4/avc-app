@@ -1,23 +1,27 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Action, Store } from '@ngrx/store';
 
-import { UserAuth, UserCredentials, UserEntity } from '../common';
+import { UserCredentials } from '../common';
+import { login, logout } from './auth.actions';
+import { selectError, selectIsAuthenticated, selectUserName } from './auth.reducer';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  authError = this.store.select(selectError);
+  isAuthenticated = this.store.select(selectIsAuthenticated);
+  userName = this.store.select(selectUserName);
 
-  getUserInfo(token: string): Observable<UserEntity> {
-    return this.http.post<UserEntity>('http://localhost:3004/auth/userinfo', { token });
+  constructor(private readonly store: Store) {}
+
+  login(payload: UserCredentials): void {
+    this.dispatch(login({ credentials: payload }));
   }
 
-  login(credentials: UserCredentials): Observable<UserAuth> {
-    return this.http.post<UserAuth>('http://localhost:3004/auth/login', {
-      login: credentials.username,
-      password: credentials.password
-    });
+  logout(): void {
+    this.dispatch(logout());
+  }
+
+  private dispatch(action: Action): void {
+    this.store.dispatch(action);
   }
 }

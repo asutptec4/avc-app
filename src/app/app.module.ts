@@ -10,7 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthEffects, authFeature } from './core/auth';
+import { AuthModule } from './core/auth/auth.module';
 import { InterceptorModule } from './core/interceptor/interceptor.module';
 import { CustomRouteReuseStrategy } from './core/route-reuse-strategy/custom-route-reuse-strategy';
 
@@ -22,7 +22,8 @@ import { CustomRouteReuseStrategy } from './core/route-reuse-strategy/custom-rou
     BrowserAnimationsModule,
     HttpClientModule,
     InterceptorModule,
-    StoreModule.forRoot({ [authFeature.name]: authFeature.reducer }, {}),
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -30,7 +31,7 @@ import { CustomRouteReuseStrategy } from './core/route-reuse-strategy/custom-rou
         console.log(state, action);
       }
     }),
-    EffectsModule.forRoot([AuthEffects])
+    AuthModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy }],
   bootstrap: [AppComponent]

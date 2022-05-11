@@ -4,6 +4,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StoreModule } from '@ngrx/store';
 
 import { GlobalSpinnerComponent } from './global-spinner/global-spinner.component';
+import { GlobalSpinnerFacade } from './global-spinner/state/global-spinner.facade';
 import { globalSpinnerFeature } from './global-spinner/state/global-spinner.reducer';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { globalSpinnerFeature } from './global-spinner/state/global-spinner.redu
     MatProgressSpinnerModule,
     StoreModule.forFeature(globalSpinnerFeature.name, globalSpinnerFeature.reducer)
   ],
-  exports: [GlobalSpinnerComponent]
+  exports: [GlobalSpinnerComponent],
+  providers: [GlobalSpinnerFacade]
 })
 export class SpinnerModule {}

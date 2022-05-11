@@ -7,7 +7,7 @@ import { catchError, exhaustMap, map, tap, withLatestFrom } from 'rxjs/operators
 
 import { TOKEN_STORAGE_KEY, UserCredentials } from '../common';
 import * as AuthActions from './auth.actions';
-import { AuthService } from './auth.service';
+import { AuthDataService } from './auth-data.service';
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {
@@ -72,7 +72,7 @@ export class AuthEffects implements OnInitEffects {
     );
   });
 
-  constructor(private actions: Actions, private authService: AuthService, private router: Router) {}
+  constructor(private actions: Actions, private authService: AuthDataService, private router: Router) {}
 
   ngrxOnInitEffects(): Action {
     return AuthActions.init();
