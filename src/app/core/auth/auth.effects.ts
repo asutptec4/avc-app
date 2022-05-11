@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, map, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 
 import { TOKEN_STORAGE_KEY, UserCredentials } from '../common';
 import * as AuthActions from './auth.actions';
@@ -14,7 +14,7 @@ export class AuthEffects implements OnInitEffects {
   init = createEffect(() => {
     return this.actions.pipe(
       ofType(AuthActions.init),
-      withLatestFrom(of(localStorage.getItem(TOKEN_STORAGE_KEY))),
+      concatLatestFrom(() => of(localStorage.getItem(TOKEN_STORAGE_KEY))),
       map(([_, token]) => {
         if (token) {
           return AuthActions.fetchUser({ token: token });

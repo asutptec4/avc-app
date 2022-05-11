@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs/operators';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
 
 import { CoursesDataService } from '../service/courses-data.service';
 import * as CoursesActions from './courses.actions';
@@ -40,7 +40,7 @@ export class CoursesEffects {
   loadMoreCourses = createEffect(() => {
     return this.actions.pipe(
       ofType(CoursesActions.loadMoreCourses),
-      withLatestFrom(this.store.select(selectCoursesList)),
+      concatLatestFrom(() => this.store.select(selectCoursesList)),
       exhaustMap(([_, courses]) =>
         this.coursesDataService.getAll({ start: courses.length, count: DISPLAY_COUNT + 1 }).pipe(
           map((courses) => CoursesActions.addCourses({ courses })),
@@ -64,7 +64,7 @@ export class CoursesEffects {
     return this.actions.pipe(
       ofType(CoursesActions.addCourses),
       map((action) => action.courses),
-      withLatestFrom(this.store.select(selectCoursesList)),
+      concatLatestFrom(() => this.store.select(selectCoursesList)),
       map(([newCourses, currentCourses]) => {
         return CoursesActions.updateCourses({
           courses: currentCourses.concat(

@@ -45,7 +45,8 @@ export const coursesFeature = createFeature({
         courses,
         isLoadAvailable: false
       })
-    )
+    ),
+    on(CoursesActions.init, (): State => initialState)
   )
 });
 
