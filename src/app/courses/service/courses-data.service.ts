@@ -1,12 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import faker from '@faker-js/faker';
 import { map, Observable } from 'rxjs';
 
 import { CourseApiParams, CourseEntity, NewCourse } from '../common';
 
 @Injectable()
-export class CoursesService {
+export class CoursesDataService {
   constructor(private http: HttpClient) {}
 
   getAll(params: CourseApiParams): Observable<CourseEntity[]> {

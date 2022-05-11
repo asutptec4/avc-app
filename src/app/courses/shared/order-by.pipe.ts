@@ -9,7 +9,7 @@ export class OrderByPipe implements PipeTransform {
       const sortProp: string = `${args[0]}`;
       const order: string = `${args[1]}` || 'asc';
       if (value.every((v: any) => sortProp in v)) {
-        return value.sort(this.sortFunction(sortProp, order));
+        return [...value].sort(this.sortFunction(sortProp, order));
       }
       console.warn(`orderBy is impossible for ${sortProp}`);
     }

@@ -4,7 +4,7 @@ import { filter, map, Subject, switchMap } from 'rxjs';
 
 import { BreadcrumbsService } from '../../ui/breadcrumbs/breadcrumbs.service';
 import { CourseEntity } from '../common';
-import { CoursesService } from '../service';
+import { CoursesDataService } from '../service';
 
 @Component({
   selector: 'app-course-item-form-viewer',
@@ -20,7 +20,7 @@ export class CourseItemFormViewerComponent implements OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private coursesService: CoursesService,
+    private coursesService: CoursesDataService,
     private breadcrumbsService: BreadcrumbsService
   ) {
     this.activatedRoute.params

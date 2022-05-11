@@ -4,9 +4,9 @@
   </mat-card>
 </ng-template>
 
-<ng-container *ngIf="courses.length > 0; else noDataTemplate">
+<ng-container *ngIf="hasCourses; else noDataTemplate">
   <app-course-item
-    *ngFor="let course of courses | orderBy: 'date':'desc'; trackBy: courseTrackByFn"
+    *ngFor="let course of (courses | async)! | orderBy: 'date':'desc'; trackBy: courseTrackByFn"
     [course]="course"
     [isActionsDisabled]="(isActionsDisabled | async) === false"
     (deleteAction)="onDeleteAction(course)"
@@ -21,9 +21,9 @@
       automation-id="courses-list-load-button"
       color="primary"
       (click)="onLoadMoreClick()"
-      [disabled]="isLoadDisabled"
+      [disabled]="isLoadMoreDisabled | async"
     >
-      {{ isLoadDisabled ? 'No more' : 'Load more' }}
+      {{ (isLoadMoreDisabled | async) ? 'No more' : 'Load more' }}
     </button>
   </mat-card-content>
 </mat-card>

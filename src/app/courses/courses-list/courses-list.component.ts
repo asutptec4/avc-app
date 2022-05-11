@@ -1,20 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { map, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
-import { selectIsAuthenticated } from '../../core/auth';
-import { hide, show } from '../../core/spinner/global-spinner/state/global-spinner.actions';
-import { CourseApiParams, CourseEntity } from '../common';
-import { CoursesService } from '../service';
+import { AuthService } from '../../core/auth';
+import { GlobalSpinnerFacade } from '../../core/spinner/global-spinner/state/global-spinner.facade';
+import { CourseEntity } from '../common';
+import { CoursesDataService, CoursesFacade } from '../service';
 
 @Component({
   selector: 'app-courses-list',
@@ -24,50 +15,23 @@ import { CoursesService } from '../service';
 })
 export class CoursesListComponent implements OnInit, OnChanges {
   @Input() searchKey: string = '';
-  courses: CourseEntity[] = [];
-  isActionsDisabled: Observable<boolean> = this.store.select(selectIsAuthenticated);
-  isLoadDisabled: boolean = false;
+  courses: Observable<CourseEntity[]> = this.coursesService.courses;
+  hasCourses: Observable<boolean> = this.coursesService.hasCourses;
+  isActionsDisabled: Observable<boolean> = this.authService.isAuthenticated;
+  isLoadMoreDisabled: Observable<boolean> = this.coursesService.isLoadMoreDisabled;
   noDataTitle = 'No data. Feel free to add new course.';
-  private startIndex: number = 0;
-  private count: number = 4;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private coursesService: CoursesService,
-    private readonly changeDetectorRef: ChangeDetectorRef,
-    private store: Store
+    private authService: AuthService,
+    private coursesService: CoursesFacade,
+    private coursesDataService: CoursesDataService,
+    private globalSpinnerService: GlobalSpinnerFacade
   ) {}
 
   ngOnInit(): void {
-    this.fetchAndUpdateCourses();
-  }
-
-  private fetchAndUpdateCourses(): void {
-    this.fetchCourses({ start: this.startIndex, count: this.count }, this.updateCourses.bind(this));
-  }
-
-  private fetchCourses(params: CourseApiParams, onLoadHandler: (courses: CourseEntity[]) => void): void {
-    this.store.dispatch(show());
-    this.coursesService
-      .getAll(params)
-      .pipe(
-        tap((courses) => {
-          onLoadHandler(courses);
-        }),
-        tap(() => this.store.dispatch(hide()))
-      )
-      .subscribe();
-  }
-
-  private updateCourses(courses: CourseEntity[]): void {
-    if (courses.length === this.count) {
-      courses.pop();
-    } else {
-      this.isLoadDisabled = true;
-    }
-    this.courses = this.courses.concat(courses);
-    this.changeDetectorRef.markForCheck();
+    this.coursesService.initCoursesPage();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -78,30 +42,14 @@ export class CoursesListComponent implements OnInit, OnChanges {
 
   private makeSearch(): void {
     if (this.searchKey === '') {
-      this.resetCourses();
+      this.coursesService.initCoursesPage();
     } else {
-      this.fetchBySearch();
+      this.coursesService.searchCourses(this.searchKey);
     }
   }
 
-  private resetCourses(): void {
-    this.courses = [];
-    this.startIndex = 0;
-    this.isLoadDisabled = false;
-    this.fetchAndUpdateCourses();
-  }
-
-  private fetchBySearch() {
-    this.fetchCourses({ textFragment: this.searchKey }, (courses) => {
-      this.courses = courses;
-      this.isLoadDisabled = true;
-      this.changeDetectorRef.markForCheck();
-    });
-  }
-
   onLoadMoreClick(): void {
-    this.startIndex += this.count - 1;
-    this.fetchAndUpdateCourses();
+    this.coursesService.loadMoreCourses();
   }
 
   onDeleteAction(course: CourseEntity): void {
@@ -111,14 +59,14 @@ export class CoursesListComponent implements OnInit, OnChanges {
   private deleteCourse(course: CourseEntity): void {
     const confirm = window.confirm(`Are you sure you want to delete this ${course.name}?`);
     if (confirm) {
-      this.store.dispatch(show());
-      this.coursesService
+      this.globalSpinnerService.show();
+      this.coursesDataService
         .remove(course.id)
         .pipe(
           tap(() => {
             this.makeSearch();
           }),
-          tap(() => this.store.dispatch(hide()))
+          tap(() => this.globalSpinnerService.hide())
         )
         .subscribe();
     }

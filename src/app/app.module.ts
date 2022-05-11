@@ -26,10 +26,7 @@ import { CustomRouteReuseStrategy } from './core/route-reuse-strategy/custom-rou
     EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production,
-      monitor: (state, action) => {
-        console.log(state, action);
-      }
+      logOnly: environment.production
     }),
     AuthModule
   ],
