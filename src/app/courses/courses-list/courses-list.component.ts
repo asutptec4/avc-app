@@ -5,7 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { AuthService } from '../../core/auth';
 import { GlobalSpinnerFacade } from '../../core/spinner/global-spinner/state/global-spinner.facade';
 import { CourseEntity } from '../common';
-import { CoursesDataService, CoursesFacade } from '../service';
+import { CoursesDataService, CoursesFacade } from '../services';
 
 @Component({
   selector: 'app-courses-list',

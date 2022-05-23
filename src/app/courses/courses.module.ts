@@ -13,7 +13,7 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesToolbarComponent } from './courses-toolbar/courses-toolbar.component';
 import { CoursesViewerComponent } from './courses-viewer/courses-viewer.component';
 import { CoursesComponent } from './courses.component';
-import { CoursesServiceModule } from './service/courses-service.module';
+import { CoursesServiceModule } from './services/courses-service.module';
 import { CoursesSharedModule } from './shared/courses-shared.module';
 
 @NgModule({

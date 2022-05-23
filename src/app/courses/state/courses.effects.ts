@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 
-import { CoursesDataService } from '../service/courses-data.service';
+import { CoursesDataService } from '../services/courses-data.service';
 import * as CoursesActions from './courses.actions';
 import { selectCoursesList } from './courses.reducer';
 
