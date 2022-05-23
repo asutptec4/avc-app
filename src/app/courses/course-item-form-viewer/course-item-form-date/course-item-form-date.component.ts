@@ -9,5 +9,4 @@ import { FormControl } from '@angular/forms';
 })
 export class CourseItemFormDateComponent {
   @Input() control!: FormControl | null;
-  @Input() date: Date = new Date();
 }

@@ -17,7 +17,6 @@ import { CourseItemFormDurationComponent } from './course-item-form-duration/cou
 import { CourseItemFormTitleComponent } from './course-item-form-title/course-item-form-title.component';
 import { CourseItemFormViewerRoutingModule } from './course-item-form-viewer-routing.module';
 import { CourseItemFormViewerComponent } from './course-item-form-viewer.component';
-import { ExtractFormControlPipe } from './shared/extract-form-control.pipe';
 
 @NgModule({
   declarations: [
@@ -26,8 +25,7 @@ import { ExtractFormControlPipe } from './shared/extract-form-control.pipe';
     CourseItemFormTitleComponent,
     CourseItemFormDescriptionComponent,
     CourseItemFormDurationComponent,
-    CourseItemFormDateComponent,
-    ExtractFormControlPipe
+    CourseItemFormDateComponent
   ],
   imports: [
     CommonModule,

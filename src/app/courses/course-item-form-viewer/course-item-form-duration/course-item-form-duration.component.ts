@@ -9,5 +9,4 @@ import { FormControl } from '@angular/forms';
 })
 export class CourseItemFormDurationComponent {
   @Input() control!: FormControl | null;
-  duration: number = 0;
 }
