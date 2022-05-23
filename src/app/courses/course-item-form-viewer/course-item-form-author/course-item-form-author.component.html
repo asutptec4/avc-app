@@ -1,7 +1,7 @@
 <mat-form-field appearance="fill" *ngIf="control">
   <mat-label>Authors</mat-label>
   <mat-chip-list #chipList aria-label="Authors selection">
-    <mat-chip *ngFor="let author of authors" (removed)="remove(author)">
+    <mat-chip *ngFor="let author of selectedAuthors" (removed)="remove(author)">
       {{ author.name }}
       <button matChipRemove>
         <mat-icon>cancel</mat-icon>
@@ -13,6 +13,12 @@
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       [matChipInputAddOnBlur]="addOnBlur"
       (matChipInputTokenEnd)="add($event)"
+      [matAutocomplete]="auto"
     />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let author of allAuthors | async" [value]="author">
+        {{ author.name }} {{ author.lastName }}
+      </mat-option>
+    </mat-autocomplete>
   </mat-chip-list>
 </mat-form-field>
