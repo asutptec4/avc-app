@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" *ngIf="control">
   <mat-label>Title</mat-label>
-  <input matInput required />
+  <input placeholder="Add title" name="courses[name]" matInput [formControl]="control" required />
 </mat-form-field>

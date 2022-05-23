@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, Subject, switchMap, tap } from 'rxjs';
 
@@ -21,7 +21,8 @@ export class CourseItemFormViewerComponent implements OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private coursesService: CoursesDataService,
-    private breadcrumbsService: BreadcrumbsService
+    private breadcrumbsService: BreadcrumbsService,
+    private changeDetector: ChangeDetectorRef
   ) {
     this.activatedRoute.params
       .pipe(
@@ -32,6 +33,7 @@ export class CourseItemFormViewerComponent implements OnDestroy {
           if (course) {
             this.breadcrumbsService.updateCrumbs(['Courses', course.name]);
             this.course = course;
+            this.changeDetector.detectChanges();
           } else {
             this.breadcrumbsService.updateCrumbs(['Courses', 'New']);
           }

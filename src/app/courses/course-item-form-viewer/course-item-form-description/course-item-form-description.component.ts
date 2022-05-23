@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-course-item-form-description',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./course-item-form-description.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseItemFormDescriptionComponent {}
+export class CourseItemFormDescriptionComponent {
+  @Input() control!: FormControl | null;
+}

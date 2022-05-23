@@ -1,5 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 export interface Author {
@@ -13,6 +14,8 @@ export interface Author {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseItemFormAuthorComponent {
+  @Input() control!: FormControl | null;
+
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   authors: Author[] = [{ name: 'Steve' }, { name: 'Andrew' }, { name: 'Michael' }];

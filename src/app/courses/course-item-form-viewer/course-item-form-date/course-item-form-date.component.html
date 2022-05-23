@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" *ngIf="control">
   <mat-label>Date</mat-label>
   <input matInput [matDatepicker]="picker" [value]="date" required />
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

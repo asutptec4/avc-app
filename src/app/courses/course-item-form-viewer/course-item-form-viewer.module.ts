@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -18,6 +18,7 @@ import { CourseItemFormTitleComponent } from './course-item-form-title/course-it
 import { CourseItemFormViewerRoutingModule } from './course-item-form-viewer-routing.module';
 import { CourseItemFormViewerComponent } from './course-item-form-viewer.component';
 import { CourseItemFormComponent } from './course-item-form/course-item-form.component';
+import { ExtractFormControlPipe } from './shared/extract-form-control.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CourseItemFormComponent } from './course-item-form/course-item-form.com
     CourseItemFormTitleComponent,
     CourseItemFormDescriptionComponent,
     CourseItemFormDurationComponent,
-    CourseItemFormDateComponent
+    CourseItemFormDateComponent,
+    ExtractFormControlPipe
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { CourseItemFormComponent } from './course-item-form/course-item-form.com
     MatInputModule,
     MatChipsModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ReactiveFormsModule
   ]
 })
 export class CourseItemFormViewerModule {}

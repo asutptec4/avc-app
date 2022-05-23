@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill" class="course-item-form-duration-input">
+<mat-form-field appearance="fill" class="course-item-form-duration-input" *ngIf="control">
   <mat-label>Duration</mat-label>
   <input matInput required [(ngModel)]="duration" />
 </mat-form-field>
