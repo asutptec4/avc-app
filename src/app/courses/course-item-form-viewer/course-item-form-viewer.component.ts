@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, Subject, switchMap } from 'rxjs';
+import { filter, map, Subject, switchMap, tap } from 'rxjs';
 
 import { BreadcrumbsService } from '../../ui/breadcrumbs/breadcrumbs.service';
 import { CourseEntity } from '../common';
@@ -27,12 +27,17 @@ export class CourseItemFormViewerComponent implements OnDestroy {
       .pipe(
         filter((params) => params['id']),
         map((params) => params['id']),
-        switchMap((id) => this.coursesService.getById(id))
+        switchMap((id) => this.coursesService.getById(id)),
+        tap((course) => {
+          if (course) {
+            this.breadcrumbsService.updateCrumbs(['Courses', course.name]);
+            this.course = course;
+          } else {
+            this.breadcrumbsService.updateCrumbs(['Courses', 'New']);
+          }
+        })
       )
-      .subscribe((course) => {
-        this.breadcrumbsService.updateCrumbs(['Courses', course.name]);
-        this.course = course;
-      });
+      .subscribe();
   }
 
   onSaveClick(): void {
