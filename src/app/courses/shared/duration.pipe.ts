@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DurationPipe implements PipeTransform {
   transform(minutes: number, ...args: unknown[]): string {
-    if (minutes < 0) {
+    if (Number.isNaN(+minutes) || minutes < 0) {
       return '0 min';
     }
     const h = Math.floor(minutes / 60);

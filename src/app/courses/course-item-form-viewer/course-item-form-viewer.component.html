@@ -1,6 +1,11 @@
 <mat-card class="course-item-form-viewer-container">
   <mat-card-title>New Course</mat-card-title>
-  <app-course-item-form [course]="course"></app-course-item-form>
+  <app-course-item-form-title [control]="form | extractFormControl: 'name'"></app-course-item-form-title>
+  <app-course-item-form-description [control]="form | extractFormControl: 'description'">
+  </app-course-item-form-description>
+  <app-course-item-form-date [control]="form | extractFormControl: 'date'"></app-course-item-form-date>
+  <app-course-item-form-duration [control]="form | extractFormControl: 'length'"></app-course-item-form-duration>
+  <app-course-item-form-author [control]="form | extractFormControl: 'authors'"></app-course-item-form-author>
   <mat-card-actions align="end" class="course-item-form-viewer-actions">
     <button mat-raised-button automation-id="course-item-cancel-button" color="secondary" [routerLink]="['']">
       <mat-icon class="course-item-icon">cancel</mat-icon>Cancel

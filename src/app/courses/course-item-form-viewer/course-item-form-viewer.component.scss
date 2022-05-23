@@ -3,6 +3,10 @@
   height: 100%;
   overflow-y: auto;
   background-color: #f5f6fa;
+
+  ::ng-deep .mat-form-field {
+    width: 100%;
+  }
 }
 
 .course-item-form-viewer-container {

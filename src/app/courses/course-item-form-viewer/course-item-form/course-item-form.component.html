@@ -1,8 +1,0 @@
-<ng-container *ngIf="form">
-  <app-course-item-form-title [control]="form | extractFormControl: 'name'"></app-course-item-form-title>
-  <app-course-item-form-description [control]="form | extractFormControl: 'description'">
-  </app-course-item-form-description>
-  <app-course-item-form-date [control]="form | extractFormControl: 'date'"></app-course-item-form-date>
-  <app-course-item-form-duration [control]="form | extractFormControl: 'length'"></app-course-item-form-duration>
-  <app-course-item-form-author [control]="form | extractFormControl: 'authors'"></app-course-item-form-author>
-</ng-container>
