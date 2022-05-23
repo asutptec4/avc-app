@@ -10,7 +10,13 @@
     <button mat-raised-button automation-id="course-item-cancel-button" color="secondary" [routerLink]="['']">
       <mat-icon class="course-item-icon">cancel</mat-icon>Cancel
     </button>
-    <button mat-raised-button automation-id="course-item-save-button" color="primary" (click)="onSaveClick()">
+    <button
+      mat-raised-button
+      automation-id="course-item-save-button"
+      [disabled]="isSaveDisabled"
+      color="primary"
+      (click)="onSaveClick()"
+    >
       <mat-icon class="course-item-icon">save</mat-icon>Save
     </button>
   </mat-card-actions>

@@ -5,7 +5,7 @@ import { filter, map, Subject, switchMap, takeUntil, tap } from 'rxjs';
 
 import { BreadcrumbsService } from '../../ui/breadcrumbs/breadcrumbs.service';
 import { CourseEntity } from '../common';
-import { CoursesDataService } from '../service';
+import { CoursesDataService } from '../services';
 
 @Component({
   selector: 'app-course-item-form-viewer',
@@ -22,6 +22,7 @@ export class CourseItemFormViewerComponent implements OnInit, OnDestroy {
     length: new FormControl(null, [Validators.required, Validators.min(0)]),
     authors: new FormControl([], Validators.required)
   });
+  isSaveDisabled = false;
 
   private readonly destroy = new Subject<void>();
 
@@ -55,6 +56,7 @@ export class CourseItemFormViewerComponent implements OnInit, OnDestroy {
     this.form.valueChanges
       .pipe(
         tap(() => {
+          this.isSaveDisabled = !this.form.valid;
           this.changeDetectorRef.markForCheck();
         }),
         takeUntil(this.destroy)
