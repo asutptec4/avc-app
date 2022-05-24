@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Store } from '@ngrx/store';
 import { filter, tap } from 'rxjs';
 
-import { AuthService, login, selectError } from '../../core/auth';
+import { AuthService } from '../../core/auth';
+import { UserCredentials } from '../../core/common';
 
 @Component({
   selector: 'app-login-form',
@@ -12,8 +12,7 @@ import { AuthService, login, selectError } from '../../core/auth';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent implements OnInit {
-  userName: string = '';
-  password: string = '';
+  userCredentials: UserCredentials = { username: '', password: '' };
 
   constructor(private snackBar: MatSnackBar, private authService: AuthService) {}
 
@@ -31,6 +30,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   onLoginClick(): void {
-    this.authService.login({ username: this.userName, password: this.password });
+    this.authService.login(this.userCredentials);
   }
 }
