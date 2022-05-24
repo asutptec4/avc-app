@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 import { BreadcrumbsModule } from '../ui/breadcrumbs/breadcrumbs.module';
+import { CourseDeleteDialogComponent } from './course-delete-dialog/course-delete-dialog.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesRoutingModule } from './courses-routing.module';
@@ -22,7 +24,8 @@ import { CoursesSharedModule } from './shared/courses-shared.module';
     CoursesToolbarComponent,
     CoursesViewerComponent,
     CourseItemComponent,
-    CoursesListComponent
+    CoursesListComponent,
+    CourseDeleteDialogComponent
   ],
   imports: [
     FormsModule,
@@ -34,7 +37,8 @@ import { CoursesSharedModule } from './shared/courses-shared.module';
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ]
 })
 export class CoursesModule {}

@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { filter, Observable, switchMap, tap } from 'rxjs';
 
 import { AuthService } from '../../core/auth';
 import { GlobalSpinnerFacade } from '../../core/spinner/global-spinner/state/global-spinner.facade';
 import { CourseEntity } from '../common';
+import { CourseDeleteDialogComponent } from '../course-delete-dialog/course-delete-dialog.component';
 import { CoursesDataService, CoursesFacade } from '../services';
 
 @Component({
@@ -27,7 +29,8 @@ export class CoursesListComponent implements OnInit, OnChanges {
     private authService: AuthService,
     private coursesService: CoursesFacade,
     private coursesDataService: CoursesDataService,
-    private globalSpinnerService: GlobalSpinnerFacade
+    private globalSpinnerService: GlobalSpinnerFacade,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -57,19 +60,21 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
 
   private deleteCourse(course: CourseEntity): void {
-    const confirm = window.confirm(`Are you sure you want to delete this ${course.name}?`);
-    if (confirm) {
-      this.globalSpinnerService.show();
-      this.coursesDataService
-        .remove(course.id)
-        .pipe(
-          tap(() => {
-            this.makeSearch();
-          }),
-          tap(() => this.globalSpinnerService.hide())
-        )
-        .subscribe();
-    }
+    const dialogRef = this.dialog.open(CourseDeleteDialogComponent, {
+      data: {
+        course
+      }
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((confirm: boolean) => confirm),
+        tap(() => this.globalSpinnerService.show()),
+        switchMap(() => this.coursesDataService.remove(course.id)),
+        tap(() => this.makeSearch()),
+        tap(() => this.globalSpinnerService.hide())
+      )
+      .subscribe();
   }
 
   onEditAction(course: CourseEntity): void {
