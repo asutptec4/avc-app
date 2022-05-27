@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs';
 
 import { BreadcrumbsService } from '../../ui/breadcrumbs/breadcrumbs.service';
 import { CourseEntity } from '../common';
@@ -13,7 +13,7 @@ import { CoursesDataService } from '../services';
   styleUrls: ['./course-item-form-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseItemFormViewerComponent implements OnInit, OnDestroy {
+export class CourseItemFormViewerComponent {
   course: CourseEntity = {} as CourseEntity;
   form = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
@@ -22,9 +22,6 @@ export class CourseItemFormViewerComponent implements OnInit, OnDestroy {
     length: new FormControl(null, [Validators.required, Validators.min(0)]),
     authors: new FormControl([], Validators.required)
   });
-  isSaveDisabled = false;
-
-  private readonly destroy = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -52,18 +49,6 @@ export class CourseItemFormViewerComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  ngOnInit(): void {
-    this.form.valueChanges
-      .pipe(
-        tap(() => {
-          this.isSaveDisabled = !this.form.valid;
-          this.changeDetectorRef.markForCheck();
-        }),
-        takeUntil(this.destroy)
-      )
-      .subscribe();
-  }
-
   onSaveClick(): void {
     this.form.markAllAsTouched();
     if (this.form.valid) {
@@ -86,10 +71,5 @@ export class CourseItemFormViewerComponent implements OnInit, OnDestroy {
 
   onCancelClick(): void {
     this.navigateToMainPage();
-  }
-
-  ngOnDestroy(): void {
-    this.destroy.next();
-    this.destroy.complete();
   }
 }

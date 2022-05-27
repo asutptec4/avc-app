@@ -1,6 +1,6 @@
 <mat-form-field appearance="fill" *ngIf="control">
   <mat-label>Authors</mat-label>
-  <mat-chip-list #chipList aria-label="Authors selection">
+  <mat-chip-list #chipList aria-label="Authors selection" [formControl]="control">
     <mat-chip *ngFor="let author of selectedAuthors" (removed)="remove(author)">
       {{ author.name }}
       <button matChipRemove>
@@ -10,6 +10,8 @@
     <input
       placeholder="Add author..."
       #authorsInput
+      matInput
+      aria-label="Authors"
       [formControl]="authorsControl"
       [matAutocomplete]="auto"
       [matChipInputFor]="chipList"

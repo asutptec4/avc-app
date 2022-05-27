@@ -1,6 +1,6 @@
 <mat-form-field appearance="fill" class="course-item-form-duration-input" *ngIf="control">
   <mat-label>Duration</mat-label>
-  <input matInput required [formControl]="control" />
+  <input matInput [formControl]="control" />
 </mat-form-field>
 <div class="course-item-form-duration-converted">
   {{ control?.value | duration }}

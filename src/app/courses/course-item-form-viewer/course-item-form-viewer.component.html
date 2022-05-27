@@ -13,7 +13,7 @@
     <button
       mat-raised-button
       automation-id="course-item-save-button"
-      [disabled]="isSaveDisabled"
+      [disabled]="!form.valid"
       color="primary"
       (click)="onSaveClick()"
     >

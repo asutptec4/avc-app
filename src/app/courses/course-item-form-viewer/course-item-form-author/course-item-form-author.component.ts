@@ -8,7 +8,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { combineLatest, map, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
@@ -28,7 +28,7 @@ export class CourseItemFormAuthorComponent implements OnInit {
 
   @ViewChild('authorsInput') authorsInput!: ElementRef<HTMLInputElement>;
 
-  authorsControl: FormControl = new FormControl();
+  authorsControl: FormControl = new FormControl(null, Validators.required);
   private readonly destroy = new Subject<void>();
   filteredAuthors: Observable<Author[]> = of([]);
   selectedAuthors: Author[] = [];
@@ -89,6 +89,7 @@ export class CourseItemFormAuthorComponent implements OnInit {
     const value = (event.value || '').trim();
     if (value) {
       this.selectedAuthors.push({ id: value, name: value, lastName: value });
+      this.updateControlValue(this.selectedAuthors);
     }
     event.chipInput!.clear();
     this.authorsControl.setValue(null);
