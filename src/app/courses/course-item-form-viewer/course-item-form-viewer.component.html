@@ -7,7 +7,7 @@
   <app-course-item-form-duration [control]="form | extractFormControl: 'length'"></app-course-item-form-duration>
   <app-course-item-form-author [control]="form | extractFormControl: 'authors'"></app-course-item-form-author>
   <mat-card-actions align="end" class="course-item-form-viewer-actions">
-    <button mat-raised-button automation-id="course-item-cancel-button" color="secondary" [routerLink]="['']">
+    <button mat-raised-button automation-id="course-item-cancel-button" color="secondary" (click)="onCancelClick()">
       <mat-icon class="course-item-icon">cancel</mat-icon>Cancel
     </button>
     <button

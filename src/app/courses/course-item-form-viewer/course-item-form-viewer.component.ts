@@ -67,10 +67,25 @@ export class CourseItemFormViewerComponent implements OnInit, OnDestroy {
   onSaveClick(): void {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.breadcrumbsService.updateCrumbs(['Courses']);
-      this.router.navigate(['']);
+      this.coursesService
+        .create(this.form.value)
+        .pipe(
+          tap(() => {
+            this.navigateToMainPage();
+          })
+        )
+        .subscribe();
     }
     this.changeDetectorRef.markForCheck();
+  }
+
+  private navigateToMainPage(): void {
+    this.breadcrumbsService.updateCrumbs(['Courses']);
+    this.router.navigate(['']);
+  }
+
+  onCancelClick(): void {
+    this.navigateToMainPage();
   }
 
   ngOnDestroy(): void {
