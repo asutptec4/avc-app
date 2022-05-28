@@ -9,4 +9,16 @@ import { FormControl } from '@angular/forms';
 })
 export class CourseItemFormDurationComponent {
   @Input() control!: FormControl | null;
+
+  getErrorMessage(): string {
+    if (this.control?.hasError('required')) {
+      return 'Please add course duration';
+    } else if (this.control?.hasError('min')) {
+      return 'Duration must be greater than 0 minutes';
+    } else if (this.control?.hasError('pattern')) {
+      return 'Duration must be a number';
+    } else {
+      return '';
+    }
+  }
 }

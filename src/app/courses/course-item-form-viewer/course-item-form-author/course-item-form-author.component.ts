@@ -102,4 +102,8 @@ export class CourseItemFormAuthorComponent implements OnInit {
       this.updateControlValue(this.selectedAuthors);
     }
   }
+
+  getErrorMessage(): string {
+    return this.control?.hasError('required') ? 'Please select at least one author' : '';
+  }
 }

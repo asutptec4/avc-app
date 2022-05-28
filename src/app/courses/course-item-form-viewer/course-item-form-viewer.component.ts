@@ -19,7 +19,7 @@ export class CourseItemFormViewerComponent {
     name: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
     description: new FormControl(null, [Validators.required, Validators.maxLength(500)]),
     date: new FormControl(null, Validators.required),
-    length: new FormControl(null, [Validators.required, Validators.min(0)]),
+    length: new FormControl(null, [Validators.required, Validators.min(0), Validators.pattern(/^\d+$/)]),
     authors: new FormControl([], Validators.required)
   });
 

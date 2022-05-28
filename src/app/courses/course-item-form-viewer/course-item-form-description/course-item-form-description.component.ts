@@ -9,4 +9,14 @@ import { FormControl } from '@angular/forms';
 })
 export class CourseItemFormDescriptionComponent {
   @Input() control!: FormControl | null;
+
+  getErrorMessage(): string {
+    if (this.control?.hasError('required')) {
+      return 'Please add course description';
+    } else if (this.control?.hasError('maxlength')) {
+      return 'Description must be less than 500 characters';
+    } else {
+      return '';
+    }
+  }
 }

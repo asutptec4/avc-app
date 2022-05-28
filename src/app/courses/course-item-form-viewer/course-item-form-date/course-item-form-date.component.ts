@@ -9,4 +9,8 @@ import { FormControl } from '@angular/forms';
 })
 export class CourseItemFormDateComponent {
   @Input() control!: FormControl | null;
+
+  getErrorMessage(): string {
+    return this.control?.hasError('required') ? 'Please select a date' : '';
+  }
 }

@@ -9,4 +9,14 @@ import { FormControl } from '@angular/forms';
 })
 export class CourseItemFormTitleComponent {
   @Input() control!: FormControl | null;
+
+  getErrorMessage(): string {
+    if (this.control?.hasError('required')) {
+      return 'Please add course title';
+    } else if (this.control?.hasError('maxlength')) {
+      return 'Title must be less 50 characters';
+    } else {
+      return '';
+    }
+  }
 }
