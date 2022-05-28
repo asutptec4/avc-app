@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { debounceTime, filter, Subject, tap } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { debounceTime, filter, Subject, takeUntil, tap } from 'rxjs';
 
 const SEARCH_DEBOUNCE_TIME = 200;
 const SEARCH_MIN_LENGTH = 3;
@@ -13,18 +14,18 @@ const SEARCH_MIN_LENGTH = 3;
 export class CoursesToolbarComponent implements OnInit, OnDestroy {
   @Output() searchKey: EventEmitter<string> = new EventEmitter();
 
+  searchControl = new FormControl('');
   private readonly destroy = new Subject<void>();
-  private readonly searchStr: Subject<string> = new Subject();
 
   ngOnInit(): void {
-    this.searchStr
-      .asObservable()
+    this.searchControl.valueChanges
       .pipe(
-        filter((searchStr) => !searchStr || (!!searchStr && searchStr.length > SEARCH_MIN_LENGTH)),
+        filter((searchStr) => !searchStr || (!!searchStr && searchStr.length >= SEARCH_MIN_LENGTH)),
         debounceTime(SEARCH_DEBOUNCE_TIME),
         tap((searchStr) => {
           this.searchKey.emit(searchStr);
-        })
+        }),
+        takeUntil(this.destroy)
       )
       .subscribe();
   }
@@ -32,9 +33,5 @@ export class CoursesToolbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy.next();
     this.destroy.complete();
-  }
-
-  onSearchKeyUp(input: KeyboardEvent): void {
-    this.searchStr.next((input?.target as HTMLInputElement).value);
   }
 }

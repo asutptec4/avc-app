@@ -3,11 +3,8 @@
     <mat-label class="courses-toolbar-search-label">
       <mat-icon aria-hidden="false">search</mat-icon>Type to search
     </mat-label>
-    <input matInput (keyup)="onSearchKeyUp($event)" />
+    <input matInput placeholder="Please type at least 3 characters" [formControl]="searchControl" />
   </mat-form-field>
-  <!-- <button mat-raised-button automation-id="courses-toolbar-search-button" color="primary" (click)="onSearchClick()">
-    Search
-  </button> -->
 </div>
 <div class="courses-toolbar-controls">
   <button mat-raised-button automation-id="courses-toolbar-controls-add-button" color="primary" [routerLink]="['new']">
