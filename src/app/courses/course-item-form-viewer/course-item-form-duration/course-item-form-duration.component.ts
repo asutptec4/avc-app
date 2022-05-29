@@ -12,11 +12,11 @@ export class CourseItemFormDurationComponent {
 
   getErrorMessage(): string {
     if (this.control?.hasError('required')) {
-      return 'Please add course duration';
+      return 'COURSE_FORM.DURATION_FIELD.REQUIRED';
     } else if (this.control?.hasError('min')) {
-      return 'Duration must be greater than 0 minutes';
+      return 'COURSE_FORM.DURATION_FIELD.MIN';
     } else if (this.control?.hasError('pattern')) {
-      return 'Duration must be a number';
+      return 'COURSE_FORM.DURATION_FIELD.PATTERN';
     } else {
       return '';
     }

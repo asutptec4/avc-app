@@ -1,13 +1,14 @@
 <div class="courses-toolbar-search">
   <mat-form-field class="courses-toolbar-search-input" appearance="fill">
     <mat-label class="courses-toolbar-search-label">
-      <mat-icon aria-hidden="false">search</mat-icon>Type to search
+      <mat-icon aria-hidden="false">search</mat-icon>{{ 'COURSE.SEARCH' | translate }}
     </mat-label>
-    <input matInput placeholder="Please type at least 3 characters" [formControl]="searchControl" />
+    <input matInput placeholder="{{ 'COURSE.SEARCH_PLACEHOLDER' | translate }}" [formControl]="searchControl" />
   </mat-form-field>
 </div>
 <div class="courses-toolbar-controls">
   <button mat-raised-button automation-id="courses-toolbar-controls-add-button" color="primary" [routerLink]="['new']">
-    <mat-icon aria-hidden="false" class="courses-toolbar-controls-add-icon">add_circle_outline</mat-icon>Add course
+    <mat-icon aria-hidden="false" class="courses-toolbar-controls-add-icon">add_circle_outline</mat-icon
+    >{{ 'COURSE.ADD_COURSE' | translate }}
   </button>
 </div>

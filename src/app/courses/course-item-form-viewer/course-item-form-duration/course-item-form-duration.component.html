@@ -1,7 +1,7 @@
 <mat-form-field appearance="fill" class="course-item-form-duration-input" *ngIf="control">
-  <mat-label>Duration</mat-label>
-  <input matInput [formControl]="control" />
-  <mat-error *ngIf="control.invalid">{{ getErrorMessage() }}</mat-error>
+  <mat-label translate>COURSE_FORM.DURATION_FIELD.LABEL</mat-label>
+  <input placeholder="{{ 'COURSE_FORM.DURATION_FIELD.PLACEHOLDER' | translate }}" matInput [formControl]="control" />
+  <mat-error *ngIf="control.invalid">{{ getErrorMessage() | translate }}</mat-error>
 </mat-form-field>
 <div class="course-item-form-duration-converted">
   {{ control?.value | duration }}

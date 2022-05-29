@@ -1,5 +1,67 @@
 {
-  "MAIN": {
-    "LOGO": "Video Courses"
-  }
+  "COURSE": {
+    "LOGO": "Video Courses",
+    "COPYRIGHT": "Copyright © Videocourses. All rights reserved",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "NO_MORE": "No more",
+    "LOAD_MORE": "Load more",
+    "NODATA": "No data. Feel free to add new course.",
+    "ADD_COURSE": "Add Course",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "SEARCH": "Type to search",
+    "SEARCH_PLACEHOLDER": "Please type at least 3 characters",
+    "COURSES": "Courses",
+    "NEW": "New"
+  },
+  "LOGIN": {
+    "TITLE": "Login",
+    "USERNAME": "E-mail:",
+    "USERNAME_PLACEHOLDER": "Enter e-mail",
+    "PASSWORD": "Password:",
+    "PASSWORD_PLACEHOLDER": "Enter password",
+    "RESTORE": "Forgot password?"
+  },
+  "COURSE_FORM": {
+    "TITLE": "New Course",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "TITLE_FIELD": {
+      "LABEL": "Title",
+      "PLACEHOLDER": "Add title",
+      "REQUIRED": "Please add course title",
+      "MAX": "Title must be less 50 characters"
+    },
+    "AUTHOR_FIELD": {
+      "LABEL": "Authors",
+      "PLACEHOLDER": "Add author...",
+      "REQUIRED": "Please select at least one author"
+    },
+    "DATE_FIELD": {
+      "LABEL": "Date",
+      "PLACEHOLDER": "Select a date",
+      "REQUIRED": "Please select a date"
+    },
+    "DESCRIPTION_FIELD": {
+      "LABEL": "Description",
+      "PLACEHOLDER": "Add description",
+      "REQUIRED": "Please add course description",
+      "MAX": "Description must be less than 500 characters"
+    },
+    "DURATION_FIELD": {
+      "LABEL": "Duration",
+      "PLACEHOLDER": "Minutes",
+      "REQUIRED": "Please add course duration",
+      "MIN": "Duration must be greater than 0 minutes",
+      "PATTERN": "Duration must be a number"
+    }
+  },
+  "COURSE_DELETE": {
+    "TITLE": "Delete course?",
+    "MESSAGE": "Are you sure you want to delete",
+    "NO": "Cancel",
+    "YES": "Yes, delete"
+  },
+  "NOTFOUND": { "LINK": "Return on main page" }
 }

@@ -104,6 +104,6 @@ export class CourseItemFormAuthorComponent implements OnInit {
   }
 
   getErrorMessage(): string {
-    return this.control?.hasError('required') ? 'Please select at least one author' : '';
+    return this.control?.hasError('required') ? 'COURSE_FORM.AUTHOR_FIELD.REQUIRED' : '';
   }
 }

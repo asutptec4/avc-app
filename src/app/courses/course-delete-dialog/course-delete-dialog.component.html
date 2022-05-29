@@ -1,10 +1,12 @@
-<h2 mat-dialog-title>Delete course?</h2>
+<h2 mat-dialog-title translate>COURSE_DELETE.TITLE</h2>
 <mat-dialog-content class="mat-typography">
-  Are you sure you want to delete
+  {{ 'COURSE_DELETE.MESSAGE' | translate }}
   <br />
   {{ data.course.name }}?
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Yes, delete</button>
+  <button mat-button mat-dialog-close translate>{{ 'COURSE_DELETE.NO' | translate }}</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>
+    {{ 'COURSE_DELETE.YES' | translate }}
+  </button>
 </mat-dialog-actions>

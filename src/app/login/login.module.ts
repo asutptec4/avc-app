@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LoginRoutingModule } from './login-routing.module';
@@ -21,7 +22,8 @@ import { LoginComponent } from './login.component';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    TranslateModule
   ]
 })
 export class LoginModule {}

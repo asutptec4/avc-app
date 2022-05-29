@@ -11,6 +11,6 @@ export class CourseItemFormDateComponent {
   @Input() control!: FormControl | null;
 
   getErrorMessage(): string {
-    return this.control?.hasError('required') ? 'Please select a date' : '';
+    return this.control?.hasError('required') ? 'COURSE_FORM.DATE_FIELD.REQUIRED' : '';
   }
 }

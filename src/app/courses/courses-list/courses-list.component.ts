@@ -21,7 +21,6 @@ export class CoursesListComponent implements OnInit, OnChanges {
   hasCourses: Observable<boolean> = this.coursesService.hasCourses;
   isActionsDisabled: Observable<boolean> = this.authService.isAuthenticated;
   isLoadMoreDisabled: Observable<boolean> = this.coursesService.isLoadMoreDisabled;
-  noDataTitle = 'No data. Feel free to add new course.';
 
   constructor(
     private router: Router,

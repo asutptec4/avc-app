@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { BreadcrumbsModule } from '../ui/breadcrumbs/breadcrumbs.module';
 import { CourseDeleteDialogComponent } from './course-delete-dialog/course-delete-dialog.component';
@@ -38,7 +39,8 @@ import { CoursesSharedModule } from './shared/courses-shared.module';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule
   ]
 })
 export class CoursesModule {}

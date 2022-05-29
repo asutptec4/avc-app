@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { CoreSharedModule } from '../../core/shared/core-shared.module';
 import { SpinnerModule } from '../../core/spinner/spinner.module';
@@ -23,7 +24,8 @@ import { MainComponent } from './main/main.component';
     MatIconModule,
     MatButtonModule,
     CoreSharedModule,
-    SpinnerModule
+    SpinnerModule,
+    TranslateModule
   ]
 })
 export class LayoutModule {}

@@ -12,9 +12,9 @@ export class CourseItemFormTitleComponent {
 
   getErrorMessage(): string {
     if (this.control?.hasError('required')) {
-      return 'Please add course title';
+      return 'COURSE_FORM.TITLE_FIELD.REQUIRED';
     } else if (this.control?.hasError('maxlength')) {
-      return 'Title must be less 50 characters';
+      return 'COURSE_FORM.TITLE_FIELD.MAX';
     } else {
       return '';
     }

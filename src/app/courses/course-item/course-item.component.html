@@ -20,7 +20,7 @@
       [disabled]="isActionsDisabled"
       (click)="onEditClick()"
     >
-      <mat-icon class="course-item-icon">edit</mat-icon>Edit
+      <mat-icon class="course-item-icon">edit</mat-icon>{{ 'COURSE.EDIT' | translate }}
     </button>
     <button
       mat-raised-button
@@ -29,7 +29,7 @@
       [disabled]="isActionsDisabled"
       (click)="onDeleteClick()"
     >
-      <mat-icon class="course-item-icon">delete</mat-icon>Delete
+      <mat-icon class="course-item-icon">delete</mat-icon>{{ 'COURSE.DELETE' | translate }}
     </button>
   </mat-card-actions>
 </mat-card>

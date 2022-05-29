@@ -12,9 +12,9 @@ export class CourseItemFormDescriptionComponent {
 
   getErrorMessage(): string {
     if (this.control?.hasError('required')) {
-      return 'Please add course description';
+      return 'COURSE_FORM.DESCRIPTION_FIELD.REQUIRED';
     } else if (this.control?.hasError('maxlength')) {
-      return 'Description must be less than 500 characters';
+      return 'COURSE_FORM.DESCRIPTION_FIELD.MAX';
     } else {
       return '';
     }

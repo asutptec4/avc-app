@@ -9,6 +9,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { CoursesSharedModule } from '../shared/courses-shared.module';
 import { CourseItemFormAuthorComponent } from './course-item-form-author/course-item-form-author.component';
@@ -40,7 +41,8 @@ import { CourseItemFormViewerComponent } from './course-item-form-viewer.compone
     MatNativeDateModule,
     MatDatepickerModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class CourseItemFormViewerModule {}

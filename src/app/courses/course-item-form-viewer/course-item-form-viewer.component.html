@@ -1,5 +1,5 @@
 <mat-card class="course-item-form-viewer-container">
-  <mat-card-title>New Course</mat-card-title>
+  <mat-card-title>{{ 'COURSE_FORM.TITLE' | translate }}</mat-card-title>
   <app-course-item-form-title [control]="form | extractFormControl: 'name'"></app-course-item-form-title>
   <app-course-item-form-description [control]="form | extractFormControl: 'description'">
   </app-course-item-form-description>
@@ -8,7 +8,7 @@
   <app-course-item-form-author [control]="form | extractFormControl: 'authors'"></app-course-item-form-author>
   <mat-card-actions align="end" class="course-item-form-viewer-actions">
     <button mat-raised-button automation-id="course-item-cancel-button" color="secondary" (click)="onCancelClick()">
-      <mat-icon class="course-item-icon">cancel</mat-icon>Cancel
+      <mat-icon class="course-item-icon">cancel</mat-icon>{{ 'COURSE_FORM.CANCEL' | translate }}
     </button>
     <button
       mat-raised-button
@@ -17,7 +17,7 @@
       color="primary"
       (click)="onSaveClick()"
     >
-      <mat-icon class="course-item-icon">save</mat-icon>Save
+      <mat-icon class="course-item-icon">save</mat-icon>{{ 'COURSE_FORM.SAVE' | translate }}
     </button>
   </mat-card-actions>
 </mat-card>

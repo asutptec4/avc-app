@@ -1,5 +1,10 @@
 <mat-form-field appearance="fill" *ngIf="control">
-  <mat-label>Title</mat-label>
-  <input placeholder="Add title" name="courses[name]" matInput [formControl]="control" />
-  <mat-error *ngIf="control.invalid">{{ getErrorMessage() }}</mat-error>
+  <mat-label translate>COURSE_FORM.TITLE_FIELD.LABEL</mat-label>
+  <input
+    placeholder="{{ 'COURSE_FORM.TITLE_FIELD.PLACEHOLDER' | translate }}"
+    name="courses[name]"
+    matInput
+    [formControl]="control"
+  />
+  <mat-error *ngIf="control.invalid">{{ getErrorMessage() | translate }}</mat-error>
 </mat-form-field>

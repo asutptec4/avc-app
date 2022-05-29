@@ -1,6 +1,6 @@
 <ng-template #noDataTemplate>
   <mat-card>
-    <mat-card-content align="center" color="primary"> {{ noDataTitle | uppercase }} </mat-card-content>
+    <mat-card-content align="center" color="primary"> {{ 'COURSE.NODATA' | translate | uppercase }} </mat-card-content>
   </mat-card>
 </ng-template>
 
@@ -23,7 +23,7 @@
       (click)="onLoadMoreClick()"
       [disabled]="isLoadMoreDisabled | async"
     >
-      {{ (isLoadMoreDisabled | async) ? 'No more' : 'Load more' }}
+      {{ ((isLoadMoreDisabled | async) ? 'COURSE.NO_MORE' : 'COURSE.LOAD_MORE') | translate }}
     </button>
   </mat-card-content>
 </mat-card>

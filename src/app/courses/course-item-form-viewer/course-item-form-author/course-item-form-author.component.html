@@ -1,5 +1,5 @@
 <mat-form-field appearance="fill" *ngIf="control">
-  <mat-label>Authors</mat-label>
+  <mat-label translate>COURSE_FORM.AUTHOR_FIELD.LABEL</mat-label>
   <mat-chip-list #chipList aria-label="Authors selection" [formControl]="control">
     <mat-chip *ngFor="let author of selectedAuthors" (removed)="remove(author)">
       {{ author.name }}
@@ -8,7 +8,7 @@
       </button>
     </mat-chip>
     <input
-      placeholder="Add author..."
+      placeholder="{{ 'COURSE_FORM.AUTHOR_FIELD.PLACEHOLDER' | translate }}"
       #authorsInput
       matInput
       aria-label="Authors"
@@ -19,7 +19,7 @@
       (matChipInputTokenEnd)="add($event)"
     />
   </mat-chip-list>
-  <mat-error *ngIf="control.invalid">{{ getErrorMessage() }}</mat-error>
+  <mat-error *ngIf="control.invalid">{{ getErrorMessage() | translate }}</mat-error>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
     <mat-option *ngFor="let author of filteredAuthors | async" [value]="author">
       {{ author.name }} {{ author.lastName }}
