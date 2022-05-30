@@ -1,0 +1,6 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="language selector">
+  <mat-icon>language</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let lang of langList" (click)="selected(lang)">{{ lang }}</button>
+</mat-menu>

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../../core/auth';
@@ -13,10 +12,7 @@ import { AuthService } from '../../../core/auth';
 export class HeaderComponent {
   userName: Observable<string | undefined> = this.authService.userName;
 
-  constructor(private authService: AuthService, private translate: TranslateService) {
-    translate.setDefaultLang('en');
-    translate.use('en');
-  }
+  constructor(private authService: AuthService) {}
 
   onLogoutClick(): void {
     this.authService.logout();

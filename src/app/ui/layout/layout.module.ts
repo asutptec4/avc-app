@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CoreSharedModule } from '../../core/shared/core-shared.module';
 import { SpinnerModule } from '../../core/spinner/spinner.module';
+import { LangSelectorModule } from '../lang-selector/lang-selector.module';
 import { LogoModule } from '../logo/logo.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
@@ -25,7 +26,8 @@ import { MainComponent } from './main/main.component';
     MatButtonModule,
     CoreSharedModule,
     SpinnerModule,
-    TranslateModule
+    TranslateModule,
+    LangSelectorModule
   ]
 })
 export class LayoutModule {}

@@ -7,6 +7,7 @@
     <app-logo></app-logo>
   </a>
   <span class="header-spacer"></span>
+  <app-lang-selector></app-lang-selector>
   <ng-container *appIfAuthenticated="loginTemplate">
     <button mat-button aria-label="Login" automation-id="header-login-button" [routerLink]="'login'">
       <mat-icon>person</mat-icon>{{ 'COURSE.LOGIN' | translate }}
