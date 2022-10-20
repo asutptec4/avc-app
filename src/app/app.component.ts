@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, InjectionToken } from '@angular/core';
-
-const Window = new InjectionToken<Window>('Window', { factory: () => window });
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +6,4 @@ const Window = new InjectionToken<Window>('Window', { factory: () => window });
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-  constructor(@Inject(Window) private w: Window) {
-    console.log(w);
-  }
-}
+export class AppComponent {}

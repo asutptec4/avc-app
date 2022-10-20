@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, switchMap, tap } from 'rxjs';
 
@@ -15,12 +15,12 @@ import { CoursesDataService } from '../services';
 })
 export class CourseItemFormViewerComponent {
   course: CourseEntity = {} as CourseEntity;
-  form = new FormGroup({
-    name: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-    description: new FormControl(null, [Validators.required, Validators.maxLength(500)]),
-    date: new FormControl(null, Validators.required),
-    length: new FormControl(null, [Validators.required, Validators.min(0), Validators.pattern(/^\d+$/)]),
-    authors: new FormControl([], Validators.required)
+  form = new UntypedFormGroup({
+    name: new UntypedFormControl(null, [Validators.required, Validators.maxLength(50)]),
+    description: new UntypedFormControl(null, [Validators.required, Validators.maxLength(500)]),
+    date: new UntypedFormControl(null, Validators.required),
+    length: new UntypedFormControl(null, [Validators.required, Validators.min(0), Validators.pattern(/^\d+$/)]),
+    authors: new UntypedFormControl([], Validators.required)
   });
 
   constructor(

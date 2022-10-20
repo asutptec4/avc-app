@@ -8,7 +8,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { combineLatest, map, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
@@ -24,11 +24,11 @@ import { AuthorsDataService } from '../author/authors-data.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseItemFormAuthorComponent implements OnInit {
-  @Input() control!: FormControl | null;
+  @Input() control!: UntypedFormControl | null;
 
   @ViewChild('authorsInput') authorsInput!: ElementRef<HTMLInputElement>;
 
-  authorsControl: FormControl = new FormControl(null, Validators.required);
+  authorsControl: UntypedFormControl = new UntypedFormControl(null, Validators.required);
   private readonly destroy = new Subject<void>();
   filteredAuthors: Observable<Author[]> = of([]);
   selectedAuthors: Author[] = [];

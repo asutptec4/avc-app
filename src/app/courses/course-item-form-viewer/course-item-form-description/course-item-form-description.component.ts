@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-course-item-form-description',
@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseItemFormDescriptionComponent {
-  @Input() control!: FormControl | null;
+  @Input() control!: UntypedFormControl | null;
 
   getErrorMessage(): string {
     if (this.control?.hasError('required')) {

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { debounceTime, filter, Subject, takeUntil, tap } from 'rxjs';
 
 const SEARCH_DEBOUNCE_TIME = 200;
@@ -14,7 +14,7 @@ const SEARCH_MIN_LENGTH = 3;
 export class CoursesToolbarComponent implements OnInit, OnDestroy {
   @Output() searchKey: EventEmitter<string> = new EventEmitter();
 
-  searchControl = new FormControl('');
+  searchControl = new UntypedFormControl('');
   private readonly destroy = new Subject<void>();
 
   ngOnInit(): void {
